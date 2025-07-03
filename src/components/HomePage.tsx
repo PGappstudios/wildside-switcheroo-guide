@@ -1,0 +1,98 @@
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useTheme } from '../contexts/ThemeContext';
+import { ArrowRight, Map } from 'lucide-react';
+
+const HomePage = () => {
+  const { mode, themeColors } = useTheme();
+
+  if (!mode) return null;
+
+  const content = mode === 'fishing' 
+    ? {
+        title: 'Master the Art of Fishing',
+        subtitle: 'Discover the world\'s best fishing destinations and techniques',
+        features: [
+          { title: 'Global Fishing Spots', desc: 'Top-rated locations worldwide', link: '/spots' },
+          { title: 'Professional Tools', desc: 'Essential gear and equipment', link: '/tools' },
+          { title: 'Seasonal Guide', desc: 'Best times to fish', link: '/seasons' },
+          { title: 'Fish Species', desc: 'Comprehensive species database', link: '/species' }
+        ],
+        bgImage: 'https://images.unsplash.com/photo-1518877593221-1f28583780b4?auto=format&fit=crop&w=1920&q=80'
+      }
+    : {
+        title: 'Experience the Thrill of Hunting',
+        subtitle: 'Explore premier hunting grounds and wildlife tracking',
+        features: [
+          { title: 'Prime Hunting Areas', desc: 'Best locations by region', link: '/areas' },
+          { title: 'Legal Weapons', desc: 'Approved hunting equipment', link: '/weapons' },
+          { title: 'Hunting Seasons', desc: 'Optimal hunting periods', link: '/seasons' },
+          { title: 'Wildlife Guide', desc: 'Animal behavior and habitats', link: '/animals' }
+        ],
+        bgImage: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1920&q=80'
+      };
+
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <div 
+        className="relative h-screen flex items-center justify-center bg-cover bg-center"
+        style={{ backgroundImage: `url(${content.bgImage})` }}
+      >
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="relative z-10 text-center text-white max-w-4xl px-4">
+          <h1 className="text-6xl font-bold mb-6 animate-fade-in">
+            {content.title}
+          </h1>
+          <p className="text-xl mb-8 animate-fade-in">
+            {content.subtitle}
+          </p>
+          <Link
+            to="/spots"
+            className={`inline-flex items-center bg-gradient-to-r ${themeColors.gradient} text-white px-8 py-4 rounded-lg text-lg font-semibold hover:scale-105 transition-transform`}
+          >
+            Explore Now
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Link>
+        </div>
+      </div>
+
+      {/* Features Grid */}
+      <div className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+              Everything You Need
+            </h2>
+            <p className="text-xl text-gray-600">
+              Comprehensive resources for your outdoor adventures
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {content.features.map((feature, index) => (
+              <Link
+                key={feature.title}
+                to={feature.link}
+                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow group"
+              >
+                <div className={`w-12 h-12 bg-gradient-to-r ${themeColors.gradient} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                  <Map className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600">
+                  {feature.desc}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default HomePage;
