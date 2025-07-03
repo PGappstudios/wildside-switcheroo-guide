@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
-import { Fish, Map } from 'lucide-react';
+import { Fish, Deer } from 'lucide-react';
 
 const Header = () => {
   const { mode, setMode, themeColors } = useTheme();
@@ -33,8 +33,8 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-2 text-xl font-bold">
-            <Fish className="h-6 w-6" />
-            <span>{mode === 'fishing' ? 'FishingPro' : 'HuntingPro'}</span>
+            {mode === 'fishing' ? <Fish className="h-6 w-6" /> : <Deer className="h-6 w-6" />}
+            <span>{mode === 'fishing' ? 'Fishing' : 'Hunting'}</span>
           </Link>
           
           <nav className="hidden md:flex space-x-6">
