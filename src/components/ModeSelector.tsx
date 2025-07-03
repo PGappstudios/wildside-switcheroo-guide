@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
-import { Fish } from 'lucide-react';
+import { Fish, Map } from 'lucide-react';
 
 const ModeSelector = () => {
   const { setMode } = useTheme();
