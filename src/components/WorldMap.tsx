@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
-import { MapPin, Calendar, Target, Thermometer, Droplets, Wind, Info, ExternalLink } from 'lucide-react';
+import { MapPin, Calendar, Target, Thermometer, Droplets, Wind, Info, ExternalLink, Trophy, Crown, Star } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Separator } from './ui/separator';
@@ -29,7 +29,54 @@ const regionData = {
       fishing: 'State licenses, some federal waters require additional permits'
     },
     hotspots: ['Yellowstone National Park', 'Great Lakes Region', 'Rocky Mountain National Park'],
-    difficulty: 'Beginner to Advanced'
+    difficulty: 'Beginner to Advanced',
+    topCountries: [
+      {
+        name: 'United States',
+        rank: 1,
+        description: 'World-renowned for its diverse ecosystems and abundant wildlife',
+        topAnimals: ['White-tail Deer', 'Elk', 'Black Bear'],
+        topFish: ['Largemouth Bass', 'Rainbow Trout', 'Chinook Salmon'],
+        famousRivers: ['Colorado River', 'Missouri River', 'Columbia River'],
+        famousForests: ['Yellowstone National Forest', 'Olympic National Forest', 'Superior National Forest'],
+        bestRegions: ['Montana - Big Sky Country', 'Alaska - Last Frontier', 'Colorado - Rocky Mountain High'],
+        funFacts: [
+          'Home to the largest elk herd in North America',
+          'Over 400 species of freshwater fish',
+          'Contains 63 national parks'
+        ]
+      },
+      {
+        name: 'Canada',
+        rank: 2,
+        description: 'Vast wilderness areas with pristine hunting and fishing opportunities',
+        topAnimals: ['Moose', 'Caribou', 'Brown Bear'],
+        topFish: ['Northern Pike', 'Lake Trout', 'Atlantic Salmon'],
+        famousRivers: ['Mackenzie River', 'Fraser River', 'Ottawa River'],
+        famousForests: ['Boreal Forest', 'Great Bear Rainforest', 'Acadian Forest'],
+        bestRegions: ['British Columbia - Wild Pacific Coast', 'Alberta - Canadian Rockies', 'Ontario - Great Lakes'],
+        funFacts: [
+          'Contains 20% of the world\'s freshwater',
+          'Home to the world\'s largest moose population',
+          'Has over 36,000 lakes larger than 3 hectares'
+        ]
+      },
+      {
+        name: 'Mexico',
+        rank: 3,
+        description: 'Unique desert and coastal ecosystems with tropical species',
+        topAnimals: ['White-tail Deer', 'Javelina', 'Wild Turkey'],
+        topFish: ['Tarpon', 'Marlin', 'Dorado'],
+        famousRivers: ['Rio Grande', 'Colorado River', 'Usumacinta River'],
+        famousForests: ['Sierra Madre Occidental', 'Lacandon Jungle', 'Cloud Forests of Veracruz'],
+        bestRegions: ['Sonora - Desert Hunting', 'Yucatan - Coastal Fishing', 'Chihuahua - Mountain Wilderness'],
+        funFacts: [
+          'One of the world\'s 17 megadiverse countries',
+          'Home to unique desert bighorn sheep',
+          'Pacific coast offers world-class deep-sea fishing'
+        ]
+      }
+    ]
   },
   'south-america': {
     name: 'South America',
@@ -51,7 +98,54 @@ const regionData = {
       fishing: 'Local guides often required, seasonal restrictions'
     },
     hotspots: ['Amazon Basin', 'Pantanal Wetlands', 'Patagonian Plains'],
-    difficulty: 'Intermediate to Advanced'
+    difficulty: 'Intermediate to Advanced',
+    topCountries: [
+      {
+        name: 'Brazil',
+        rank: 1,
+        description: 'Home to the Amazon rainforest and Pantanal wetlands',
+        topAnimals: ['Jaguar', 'Capybara', 'Peccary'],
+        topFish: ['Peacock Bass', 'Piranha', 'Arapaima'],
+        famousRivers: ['Amazon River', 'Tocantins River', 'Xingu River'],
+        famousForests: ['Amazon Rainforest', 'Atlantic Forest', 'Cerrado Savanna'],
+        bestRegions: ['Pantanal - World\'s largest wetland', 'Amazon Basin - Rainforest adventure', 'Cerrado - Savanna hunting'],
+        funFacts: [
+          'Amazon River is the world\'s largest river by volume',
+          'Pantanal has the highest concentration of wildlife in the Americas',
+          'Home to over 3,000 freshwater fish species'
+        ]
+      },
+      {
+        name: 'Argentina',
+        rank: 2,
+        description: 'Diverse landscapes from Patagonia to subtropical north',
+        topAnimals: ['Red Deer', 'Wild Boar', 'Water Buffalo'],
+        topFish: ['Dorado', 'Pacu', 'Surubim'],
+        famousRivers: ['Paraná River', 'Río de la Plata', 'Colorado River'],
+        famousForests: ['Valdivian Forest', 'Yungas Cloud Forest', 'Southern Patagonian Forest'],
+        bestRegions: ['Patagonia - Endless plains', 'Mesopotamia - River delta', 'Northwest - Andean foothills'],
+        funFacts: [
+          'Dorado is called the "River Tiger" for its fighting spirit',
+          'Patagonia offers some of the world\'s best trout fishing',
+          'Home to the world\'s southernmost forests'
+        ]
+      },
+      {
+        name: 'Colombia',
+        rank: 3,
+        description: 'Incredible biodiversity across varied ecosystems',
+        topAnimals: ['White-tail Deer', 'Peccary', 'Capybara'],
+        topFish: ['Peacock Bass', 'Payara', 'Catfish'],
+        famousRivers: ['Magdalena River', 'Orinoco River', 'Atrato River'],
+        famousForests: ['Chocó Rainforest', 'Amazon Rainforest', 'Andean Cloud Forests'],
+        bestRegions: ['Llanos - Eastern plains', 'Chocó - Pacific coast', 'Amazon - Southern jungle'],
+        funFacts: [
+          'Second most biodiverse country in the world',
+          'Chocó region has one of the highest rainfall rates globally',
+          'Home to over 1,500 freshwater fish species'
+        ]
+      }
+    ]
   },
   'europe': {
     name: 'Europe',
@@ -73,7 +167,54 @@ const regionData = {
       fishing: 'Country-specific licenses, EU water body regulations'
     },
     hotspots: ['Scottish Highlands', 'Scandinavian Forests', 'Alpine Regions'],
-    difficulty: 'Intermediate'
+    difficulty: 'Intermediate',
+    topCountries: [
+      {
+        name: 'Norway',
+        rank: 1,
+        description: 'Pristine wilderness with abundant game and world-class salmon fishing',
+        topAnimals: ['Red Deer', 'Moose', 'Brown Bear'],
+        topFish: ['Atlantic Salmon', 'Brown Trout', 'Arctic Char'],
+        famousRivers: ['Alta River', 'Tana River', 'Gaula River'],
+        famousForests: ['Scandinavian Forest', 'Taiga Forest', 'Coastal Forests'],
+        bestRegions: ['Finnmark - Arctic wilderness', 'Trøndelag - Salmon rivers', 'Hardangervidda - Mountain plateau'],
+        funFacts: [
+          'Home to the world\'s best Atlantic salmon fishing',
+          'Contains Europe\'s largest remaining wilderness',
+          'Midnight sun allows 24-hour fishing in summer'
+        ]
+      },
+      {
+        name: 'Scotland',
+        rank: 2,
+        description: 'Historic hunting grounds with legendary red deer and salmon',
+        topAnimals: ['Red Deer', 'Roe Deer', 'Grouse'],
+        topFish: ['Atlantic Salmon', 'Brown Trout', 'Sea Trout'],
+        famousRivers: ['River Spey', 'River Tay', 'River Tweed'],
+        famousForests: ['Caledonian Forest', 'Galloway Forest', 'Trossachs Forest'],
+        bestRegions: ['Highlands - Red deer stalking', 'Speyside - Salmon fishing', 'Cairngorms - Mountain hunting'],
+        funFacts: [
+          'Red deer stalking tradition dates back 1,000 years',
+          'River Tay produces the largest Atlantic salmon',
+          'Contains some of Europe\'s last ancient forests'
+        ]
+      },
+      {
+        name: 'Austria',
+        rank: 3,
+        description: 'Alpine hunting paradise with chamois and mountain game',
+        topAnimals: ['Red Deer', 'Chamois', 'Ibex'],
+        topFish: ['Brown Trout', 'Grayling', 'Char'],
+        famousRivers: ['Danube River', 'Traun River', 'Enns River'],
+        famousForests: ['Vienna Woods', 'Bohemian Forest', 'Alpine Forests'],
+        bestRegions: ['Tyrol - Alpine hunting', 'Styria - Forest stalking', 'Salzburg - Mountain fishing'],
+        funFacts: [
+          'Chamois hunting requires mountaineering skills',
+          'Home to some of Europe\'s largest red deer',
+          'Alpine lakes contain rare char species'
+        ]
+      }
+    ]
   },
   'africa': {
     name: 'Africa',
@@ -95,7 +236,54 @@ const regionData = {
       fishing: 'Local permits, marine protected area restrictions'
     },
     hotspots: ['Kruger National Park', 'Serengeti', 'Okavango Delta'],
-    difficulty: 'Advanced'
+    difficulty: 'Advanced',
+    topCountries: [
+      {
+        name: 'South Africa',
+        rank: 1,
+        description: 'Premier safari destination with Big Five and excellent infrastructure',
+        topAnimals: ['Cape Buffalo', 'Kudu', 'Impala'],
+        topFish: ['Yellowfin Tuna', 'Marlin', 'Kingfish'],
+        famousRivers: ['Orange River', 'Vaal River', 'Limpopo River'],
+        famousForests: ['Knysna Forest', 'Tsitsikamma Forest', 'Magoebaskloof Forest'],
+        bestRegions: ['Kruger - Big Five safari', 'Kalahari - Desert hunting', 'Cape Coast - Deep sea fishing'],
+        funFacts: [
+          'Home to the Big Five game animals',
+          'Cape Town offers world-class deep-sea fishing',
+          'Contains three of the world\'s biodiversity hotspots'
+        ]
+      },
+      {
+        name: 'Namibia',
+        rank: 2,
+        description: 'Desert hunting paradise with unique adapted species',
+        topAnimals: ['Gemsbok', 'Springbok', 'Desert Elephant'],
+        topFish: ['Kingfish', 'Steenbras', 'Kabeljou'],
+        famousRivers: ['Orange River', 'Kunene River', 'Okavango River'],
+        famousForests: ['Caprivi Strip', 'Kavango Woodland', 'Mopane Woodland'],
+        bestRegions: ['Kalahari - Desert specialists', 'Skeleton Coast - Coastal fishing', 'Caprivi - Wetland species'],
+        funFacts: [
+          'Gemsbok can survive without drinking water',
+          'Skeleton Coast is known as the world\'s largest ship graveyard',
+          'Contains the world\'s oldest desert'
+        ]
+      },
+      {
+        name: 'Tanzania',
+        rank: 3,
+        description: 'Serengeti ecosystem with the Great Migration',
+        topAnimals: ['Cape Buffalo', 'Eland', 'Sable Antelope'],
+        topFish: ['Nile Perch', 'Tiger Fish', 'Tilapia'],
+        famousRivers: ['Rufiji River', 'Ruaha River', 'Mara River'],
+        famousForests: ['Mahale Forest', 'Udzungwa Forest', 'Eastern Arc Forests'],
+        bestRegions: ['Serengeti - Great Migration', 'Selous - River hunting', 'Lake Tanganyika - Freshwater fishing'],
+        funFacts: [
+          'Serengeti migration involves 2 million animals',
+          'Lake Tanganyika is the world\'s longest freshwater lake',
+          'Home to over 1,000 bird species'
+        ]
+      }
+    ]
   },
   'asia': {
     name: 'Asia',
@@ -117,7 +305,54 @@ const regionData = {
       fishing: 'Local permits, some international waters restrictions'
     },
     hotspots: ['Siberian Taiga', 'Himalayan Foothills', 'Japanese Alps'],
-    difficulty: 'Advanced'
+    difficulty: 'Advanced',
+    topCountries: [
+      {
+        name: 'Russia',
+        rank: 1,
+        description: 'Vast Siberian wilderness with world\'s largest forest',
+        topAnimals: ['Brown Bear', 'Wild Boar', 'Red Deer'],
+        topFish: ['Salmon', 'Taimen', 'Lenok'],
+        famousRivers: ['Lena River', 'Yenisei River', 'Ob River'],
+        famousForests: ['Siberian Taiga', 'Russian Far East Forest', 'Ural Mountains Forest'],
+        bestRegions: ['Kamchatka - Pristine wilderness', 'Siberia - Endless taiga', 'Altai - Mountain hunting'],
+        funFacts: [
+          'Contains 60% of the world\'s coniferous forests',
+          'Kamchatka has the world\'s largest brown bears',
+          'Siberian taiga is the world\'s largest forest'
+        ]
+      },
+      {
+        name: 'Mongolia',
+        rank: 2,
+        description: 'Steppes and mountains with unique high-altitude species',
+        topAnimals: ['Marco Polo Sheep', 'Ibex', 'Argali Sheep'],
+        topFish: ['Taimen', 'Lenok', 'Grayling'],
+        famousRivers: ['Selenge River', 'Orkhon River', 'Tuul River'],
+        famousForests: ['Northern Mongolian Forest', 'Khangai Mountains', 'Altai Tavan Bogd'],
+        bestRegions: ['Altai Mountains - High altitude hunting', 'Gobi Desert - Desert species', 'Khövsgöl - Pristine lakes'],
+        funFacts: [
+          'Home to the world\'s largest sheep species',
+          'Taimen can grow over 1.5 meters long',
+          'Contains pristine nomadic hunting traditions'
+        ]
+      },
+      {
+        name: 'Kazakhstan',
+        rank: 3,
+        description: 'Central Asian steppes with diverse ecosystems',
+        topAnimals: ['Saiga Antelope', 'Wild Boar', 'Roe Deer'],
+        topFish: ['Carp', 'Pike', 'Perch'],
+        famousRivers: ['Irtysh River', 'Ural River', 'Syr Darya'],
+        famousForests: ['Altai Forest', 'Tien Shan Forest', 'Kazakh Steppe'],
+        bestRegions: ['Altai Region - Mountain hunting', 'Caspian Coast - Wetland species', 'Tien Shan - Alpine hunting'],
+        funFacts: [
+          'World\'s largest landlocked country',
+          'Caspian Sea produces famous caviar',
+          'Home to the endangered saiga antelope'
+        ]
+      }
+    ]
   },
   'australia': {
     name: 'Australia & Oceania',
@@ -139,7 +374,54 @@ const regionData = {
       fishing: 'State licenses, marine park restrictions'
     },
     hotspots: ['Great Barrier Reef', 'Australian Alps', 'Kakadu National Park'],
-    difficulty: 'Beginner to Advanced'
+    difficulty: 'Beginner to Advanced',
+    topCountries: [
+      {
+        name: 'Australia',
+        rank: 1,
+        description: 'Unique wildlife continent with world-class reef fishing',
+        topAnimals: ['Red Kangaroo', 'Wild Boar', 'Water Buffalo'],
+        topFish: ['Barramundi', 'Murray Cod', 'Coral Trout'],
+        famousRivers: ['Murray River', 'Darling River', 'Fitzroy River'],
+        famousForests: ['Daintree Rainforest', 'Tasmanian Wilderness', 'Jarrah Forest'],
+        bestRegions: ['Queensland - Tropical fishing', 'Northern Territory - Buffalo hunting', 'Tasmania - Wilderness adventure'],
+        funFacts: [
+          'Great Barrier Reef is the world\'s largest coral system',
+          'Murray Cod is Australia\'s largest freshwater fish',
+          'Contains 80% of species found nowhere else on Earth'
+        ]
+      },
+      {
+        name: 'New Zealand',
+        rank: 2,
+        description: 'Pristine wilderness with introduced game species',
+        topAnimals: ['Red Deer', 'Tahr', 'Wild Boar'],
+        topFish: ['Brown Trout', 'Salmon', 'Snapper'],
+        famousRivers: ['Waikato River', 'Clutha River', 'Rangitikei River'],
+        famousForests: ['Fiordland', 'Kauri Forest', 'Beech Forest'],
+        bestRegions: ['South Island - Alpine hunting', 'North Island - Thermal fishing', 'Fiordland - Wilderness experience'],
+        funFacts: [
+          'Introduced species now provide world-class hunting',
+          'Rotorua\'s thermal activity creates unique fishing',
+          'Fiordland contains some of the world\'s clearest water'
+        ]
+      },
+      {
+        name: 'Papua New Guinea',
+        rank: 3,
+        description: 'Tropical paradise with unique species and reef fishing',
+        topAnimals: ['Wild Boar', 'Deer', 'Cassowary'],
+        topFish: ['Barramundi', 'Tuna', 'Coral Trout'],
+        famousRivers: ['Sepik River', 'Fly River', 'Ramu River'],
+        famousForests: ['New Guinea Rainforest', 'Montane Forest', 'Mangrove Forest'],
+        bestRegions: ['Sepik Basin - River adventure', 'Highlands - Mountain hunting', 'Coral Triangle - Reef fishing'],
+        funFacts: [
+          'Contains 6% of the world\'s biodiversity',
+          'Sepik River is one of the world\'s great undammed rivers',
+          'Part of the Coral Triangle biodiversity hotspot'
+        ]
+      }
+    ]
   }
 };
 
@@ -217,6 +499,106 @@ const WorldMap = () => {
               <div>
                 <h4 className="font-semibold text-gray-800 mb-2">Overview</h4>
                 <p className="text-gray-600 text-sm">{currentData.description}</p>
+              </div>
+
+              <Separator />
+
+              {/* Top 3 Countries Section */}
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                  <Trophy className={`h-5 w-5 ${mode === 'fishing' ? 'text-blue-600' : 'text-green-600'}`} />
+                  Top 3 {mode === 'fishing' ? 'Fishing' : 'Hunting'} Destinations
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {currentData.topCountries.map((country) => (
+                    <Card key={country.name} className="relative">
+                      <CardHeader className="pb-3">
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="text-lg flex items-center gap-2">
+                            {country.rank === 1 && <Crown className="h-5 w-5 text-yellow-500" />}
+                            {country.rank === 2 && <Star className="h-5 w-5 text-gray-400" />}
+                            {country.rank === 3 && <Star className="h-5 w-5 text-amber-600" />}
+                            {country.name}
+                          </CardTitle>
+                          <Badge variant="outline" className="text-xs">
+                            #{country.rank}
+                          </Badge>
+                        </div>
+                        <p className="text-sm text-gray-600">{country.description}</p>
+                      </CardHeader>
+                      <CardContent className="space-y-3">
+                        <div>
+                          <h5 className="font-medium text-gray-800 text-sm mb-2">
+                            Top {mode === 'fishing' ? 'Fish' : 'Animals'}
+                          </h5>
+                          <div className="flex flex-wrap gap-1">
+                            {(mode === 'fishing' ? country.topFish : country.topAnimals).map((species) => (
+                              <Badge 
+                                key={species} 
+                                variant="secondary" 
+                                className={`text-xs ${
+                                  mode === 'fishing' 
+                                    ? 'bg-blue-100 text-blue-800' 
+                                    : 'bg-green-100 text-green-800'
+                                }`}
+                              >
+                                {species}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div>
+                          <h5 className="font-medium text-gray-800 text-sm mb-2">Famous Rivers</h5>
+                          <ul className="text-xs text-gray-600 space-y-1">
+                            {country.famousRivers.map((river) => (
+                              <li key={river} className="flex items-center gap-1">
+                                <Droplets className="h-3 w-3 text-blue-500 flex-shrink-0" />
+                                {river}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h5 className="font-medium text-gray-800 text-sm mb-2">Famous Forests</h5>
+                          <ul className="text-xs text-gray-600 space-y-1">
+                            {country.famousForests.map((forest) => (
+                              <li key={forest} className="flex items-center gap-1">
+                                <Wind className="h-3 w-3 text-green-500 flex-shrink-0" />
+                                {forest}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h5 className="font-medium text-gray-800 text-sm mb-2">Best Regions</h5>
+                          <ul className="text-xs text-gray-600 space-y-1">
+                            {country.bestRegions.map((region) => (
+                              <li key={region} className="flex items-center gap-1">
+                                <MapPin className="h-3 w-3 text-red-500 flex-shrink-0" />
+                                {region}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h5 className="font-medium text-gray-800 text-sm mb-2">Did You Know?</h5>
+                          <ul className="text-xs text-gray-600 space-y-1">
+                            {country.funFacts.map((fact, index) => (
+                              <li key={index} className="flex items-start gap-1">
+                                <Info className="h-3 w-3 text-amber-500 flex-shrink-0 mt-0.5" />
+                                {fact}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
               </div>
 
               <Separator />
