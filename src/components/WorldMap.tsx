@@ -5,7 +5,6 @@ import { MapPin, Calendar, Target, Thermometer, Droplets, Wind, Info, ExternalLi
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Separator } from './ui/separator';
-import { getApisByCategory } from '../config/apiConfig';
 
 // Enhanced region data with more detailed information
 const regionData = {
@@ -44,7 +43,8 @@ const regionData = {
           'Home to the largest elk herd in North America',
           'Over 400 species of freshwater fish',
           'Contains 63 national parks'
-        ]
+        ],
+        officialWebsite: 'https://www.usa.gov'
       },
       {
         name: 'Canada',
@@ -59,7 +59,8 @@ const regionData = {
           'Contains 20% of the world\'s freshwater',
           'Home to the world\'s largest moose population',
           'Has over 36,000 lakes larger than 3 hectares'
-        ]
+        ],
+        officialWebsite: 'https://www.canada.ca'
       },
       {
         name: 'Mexico',
@@ -74,7 +75,8 @@ const regionData = {
           'One of the world\'s 17 megadiverse countries',
           'Home to unique desert bighorn sheep',
           'Pacific coast offers world-class deep-sea fishing'
-        ]
+        ],
+        officialWebsite: 'https://www.gob.mx'
       }
     ]
   },
@@ -113,7 +115,8 @@ const regionData = {
           'Amazon River is the world\'s largest river by volume',
           'Pantanal has the highest concentration of wildlife in the Americas',
           'Home to over 3,000 freshwater fish species'
-        ]
+        ],
+        officialWebsite: 'https://www.gov.br'
       },
       {
         name: 'Argentina',
@@ -128,7 +131,8 @@ const regionData = {
           'Dorado is called the "River Tiger" for its fighting spirit',
           'Patagonia offers some of the world\'s best trout fishing',
           'Home to the world\'s southernmost forests'
-        ]
+        ],
+        officialWebsite: 'https://www.argentina.gob.ar'
       },
       {
         name: 'Colombia',
@@ -143,7 +147,8 @@ const regionData = {
           'Second most biodiverse country in the world',
           'Chocó region has one of the highest rainfall rates globally',
           'Home to over 1,500 freshwater fish species'
-        ]
+        ],
+        officialWebsite: 'https://www.gov.co'
       }
     ]
   },
@@ -182,7 +187,8 @@ const regionData = {
           'Home to the world\'s best Atlantic salmon fishing',
           'Contains Europe\'s largest remaining wilderness',
           'Midnight sun allows 24-hour fishing in summer'
-        ]
+        ],
+        officialWebsite: 'https://www.regjeringen.no'
       },
       {
         name: 'Scotland',
@@ -197,7 +203,8 @@ const regionData = {
           'Red deer stalking tradition dates back 1,000 years',
           'River Tay produces the largest Atlantic salmon',
           'Contains some of Europe\'s last ancient forests'
-        ]
+        ],
+        officialWebsite: 'https://www.gov.scot'
       },
       {
         name: 'Austria',
@@ -212,7 +219,8 @@ const regionData = {
           'Chamois hunting requires mountaineering skills',
           'Home to some of Europe\'s largest red deer',
           'Alpine lakes contain rare char species'
-        ]
+        ],
+        officialWebsite: 'https://www.oesterreich.gv.at'
       }
     ]
   },
@@ -251,7 +259,8 @@ const regionData = {
           'Home to the Big Five game animals',
           'Cape Town offers world-class deep-sea fishing',
           'Contains three of the world\'s biodiversity hotspots'
-        ]
+        ],
+        officialWebsite: 'https://www.gov.za'
       },
       {
         name: 'Namibia',
@@ -266,7 +275,8 @@ const regionData = {
           'Gemsbok can survive without drinking water',
           'Skeleton Coast is known as the world\'s largest ship graveyard',
           'Contains the world\'s oldest desert'
-        ]
+        ],
+        officialWebsite: 'https://www.gov.na'
       },
       {
         name: 'Tanzania',
@@ -281,7 +291,8 @@ const regionData = {
           'Serengeti migration involves 2 million animals',
           'Lake Tanganyika is the world\'s longest freshwater lake',
           'Home to over 1,000 bird species'
-        ]
+        ],
+        officialWebsite: 'https://www.tanzania.go.tz'
       }
     ]
   },
@@ -320,7 +331,8 @@ const regionData = {
           'Contains 60% of the world\'s coniferous forests',
           'Kamchatka has the world\'s largest brown bears',
           'Siberian taiga is the world\'s largest forest'
-        ]
+        ],
+        officialWebsite: 'https://www.gov.ru'
       },
       {
         name: 'Mongolia',
@@ -335,7 +347,8 @@ const regionData = {
           'Home to the world\'s largest sheep species',
           'Taimen can grow over 1.5 meters long',
           'Contains pristine nomadic hunting traditions'
-        ]
+        ],
+        officialWebsite: 'https://www.gov.mn'
       },
       {
         name: 'Kazakhstan',
@@ -350,7 +363,8 @@ const regionData = {
           'World\'s largest landlocked country',
           'Caspian Sea produces famous caviar',
           'Home to the endangered saiga antelope'
-        ]
+        ],
+        officialWebsite: 'https://www.gov.kz'
       }
     ]
   },
@@ -389,7 +403,8 @@ const regionData = {
           'Great Barrier Reef is the world\'s largest coral system',
           'Murray Cod is Australia\'s largest freshwater fish',
           'Contains 80% of species found nowhere else on Earth'
-        ]
+        ],
+        officialWebsite: 'https://www.australia.gov.au'
       },
       {
         name: 'New Zealand',
@@ -404,7 +419,8 @@ const regionData = {
           'Introduced species now provide world-class hunting',
           'Rotorua\'s thermal activity creates unique fishing',
           'Fiordland contains some of the world\'s clearest water'
-        ]
+        ],
+        officialWebsite: 'https://www.govt.nz'
       },
       {
         name: 'Papua New Guinea',
@@ -419,7 +435,8 @@ const regionData = {
           'Contains 6% of the world\'s biodiversity',
           'Sepik River is one of the world\'s great undammed rivers',
           'Part of the Coral Triangle biodiversity hotspot'
-        ]
+        ],
+        officialWebsite: 'https://www.png.gov.pg'
       }
     ]
   }
@@ -435,7 +452,6 @@ const WorldMap = () => {
   };
 
   const currentData = selectedRegion ? regionData[selectedRegion] : null;
-  const availableApis = mode ? getApisByCategory(mode) : [];
 
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -444,7 +460,7 @@ const WorldMap = () => {
           {mode === 'fishing' ? 'World Fishing Map' : 'World Hunting Map'}
         </h3>
         <p className="text-gray-600">
-          Click on any region to explore detailed {mode === 'fishing' ? 'fishing' : 'hunting'} opportunities and data sources
+          Click on any region to explore detailed {mode === 'fishing' ? 'fishing' : 'hunting'} opportunities and official country websites
         </p>
       </div>
 
@@ -595,6 +611,18 @@ const WorldMap = () => {
                             ))}
                           </ul>
                         </div>
+
+                        <div className="pt-2 border-t">
+                          <a
+                            href={country.officialWebsite}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 font-medium"
+                          >
+                            <ExternalLink className="h-3 w-3" />
+                            Official Website
+                          </a>
+                        </div>
                       </CardContent>
                     </Card>
                   ))}
@@ -695,31 +723,6 @@ const WorldMap = () => {
                 </div>
               </div>
 
-              <Separator />
-
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                  <Info className="h-4 w-4" />
-                  Available Data Sources
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {availableApis.slice(0, 6).map((api) => (
-                    <div key={api.name} className="text-sm p-3 bg-white rounded border">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="font-medium text-gray-800">{api.name}</span>
-                        <ExternalLink className="h-3 w-3 text-gray-400" />
-                      </div>
-                      <p className="text-xs text-gray-600">{api.description}</p>
-                    </div>
-                  ))}
-                </div>
-                {availableApis.length > 6 && (
-                  <p className="text-xs text-gray-500 mt-2">
-                    +{availableApis.length - 6} more data sources available
-                  </p>
-                )}
-              </div>
-
               {mode === 'hunting' && (
                 <>
                   <Separator />
@@ -748,7 +751,7 @@ const WorldMap = () => {
         <div className="p-8 text-center text-gray-500 border-t bg-gray-50">
           <MapPin className="h-16 w-16 mx-auto mb-4 text-gray-400" />
           <h3 className="text-lg font-semibold mb-2">Explore Regional Data</h3>
-          <p className="text-sm">Click on any region marker to view comprehensive information about local species, seasons, regulations, and available data sources.</p>
+          <p className="text-sm">Click on any region marker to view comprehensive information about local species, seasons, regulations, and official country websites.</p>
         </div>
       )}
     </div>
