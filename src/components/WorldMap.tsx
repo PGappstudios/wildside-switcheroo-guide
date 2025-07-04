@@ -166,81 +166,78 @@ const WorldMap = () => {
         </p>
       </div>
 
-      <div className="flex flex-col lg:flex-row">
-        {/* Map Container */}
-        <div className="flex-1 p-6">
-          <div className="relative inline-block">
-            <img 
-              src="/lovable-uploads/8bd16e01-3809-4baf-b376-89c4a5ff39e9.png" 
-              alt="World Map" 
-              className="w-full h-auto max-w-4xl rounded-lg shadow"
-            />
-            
-            {/* Clickable regions - positioned as overlays */}
-            {Object.entries(regionData).map(([regionKey, region]) => (
-              <button
-                key={regionKey}
-                className={`absolute w-8 h-8 rounded-full border-2 border-white shadow-lg transition-all duration-200 ${
-                  hoveredRegion === regionKey || selectedRegion === regionKey
-                    ? `${themeColors.primary} scale-125`
-                    : 'bg-red-500 hover:bg-red-600'
-                } flex items-center justify-center`}
-                style={{
-                  left: `${region.coordinates.x}%`,
-                  top: `${region.coordinates.y}%`,
-                  transform: 'translate(-50%, -50%)'
-                }}
-                onClick={() => handleRegionClick(regionKey as keyof typeof regionData)}
-                onMouseEnter={() => setHoveredRegion(regionKey as keyof typeof regionData)}
-                onMouseLeave={() => setHoveredRegion(null)}
-                title={region.name}
-              >
-                <MapPin className="h-4 w-4 text-white" />
-              </button>
-            ))}
-          </div>
+      {/* Map Container - Full Width */}
+      <div className="p-6">
+        <div className="relative inline-block w-full">
+          <img 
+            src="/lovable-uploads/8bd16e01-3809-4baf-b376-89c4a5ff39e9.png" 
+            alt="World Map" 
+            className="w-full h-auto rounded-lg shadow"
+          />
+          
+          {/* Clickable regions - positioned as overlays */}
+          {Object.entries(regionData).map(([regionKey, region]) => (
+            <button
+              key={regionKey}
+              className={`absolute w-8 h-8 rounded-full border-2 border-white shadow-lg transition-all duration-200 ${
+                hoveredRegion === regionKey || selectedRegion === regionKey
+                  ? `${themeColors.primary} scale-125`
+                  : 'bg-red-500 hover:bg-red-600'
+              } flex items-center justify-center`}
+              style={{
+                left: `${region.coordinates.x}%`,
+                top: `${region.coordinates.y}%`,
+                transform: 'translate(-50%, -50%)'
+              }}
+              onClick={() => handleRegionClick(regionKey as keyof typeof regionData)}
+              onMouseEnter={() => setHoveredRegion(regionKey as keyof typeof regionData)}
+              onMouseLeave={() => setHoveredRegion(null)}
+              title={region.name}
+            >
+              <MapPin className="h-4 w-4 text-white" />
+            </button>
+          ))}
         </div>
+      </div>
 
-        {/* Enhanced Details Panel */}
-        {currentData && (
-          <div className="w-full lg:w-96 border-l bg-gray-50 p-6 max-h-screen overflow-y-auto">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Target className={`h-5 w-5 ${mode === 'fishing' ? 'text-blue-600' : 'text-green-600'}`} />
-                  {currentData.name}
-                </CardTitle>
-                <Badge variant="outline" className="w-fit">
-                  {currentData.difficulty}
-                </Badge>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">Overview</h4>
-                  <p className="text-gray-600 text-sm">{currentData.description}</p>
-                </div>
+      {/* Details Panel - Below Map */}
+      {currentData && (
+        <div className="border-t bg-gray-50 p-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Target className={`h-5 w-5 ${mode === 'fishing' ? 'text-blue-600' : 'text-green-600'}`} />
+                {currentData.name}
+              </CardTitle>
+              <Badge variant="outline" className="w-fit">
+                {currentData.difficulty}
+              </Badge>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-2">Overview</h4>
+                <p className="text-gray-600 text-sm">{currentData.description}</p>
+              </div>
 
-                <Separator />
+              <Separator />
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex items-center gap-2">
-                    <Calendar className={`h-4 w-4 ${mode === 'fishing' ? 'text-blue-600' : 'text-green-600'}`} />
-                    <div>
-                      <h4 className="font-semibold text-gray-800 text-sm">Season</h4>
-                      <p className="text-xs text-gray-600">
-                        {mode === 'fishing' ? currentData.seasons.fishing : currentData.seasons.hunting}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Thermometer className="h-4 w-4 text-orange-500" />
-                    <div>
-                      <h4 className="font-semibold text-gray-800 text-sm">Temperature</h4>
-                      <p className="text-xs text-gray-600">{currentData.climate.temperature}</p>
-                    </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="flex items-center gap-2">
+                  <Calendar className={`h-4 w-4 ${mode === 'fishing' ? 'text-blue-600' : 'text-green-600'}`} />
+                  <div>
+                    <h4 className="font-semibold text-gray-800 text-sm">Season</h4>
+                    <p className="text-xs text-gray-600">
+                      {mode === 'fishing' ? currentData.seasons.fishing : currentData.seasons.hunting}
+                    </p>
                   </div>
                 </div>
-
+                <div className="flex items-center gap-2">
+                  <Thermometer className="h-4 w-4 text-orange-500" />
+                  <div>
+                    <h4 className="font-semibold text-gray-800 text-sm">Temperature</h4>
+                    <p className="text-xs text-gray-600">{currentData.climate.temperature}</p>
+                  </div>
+                </div>
                 <div className="flex items-center gap-2">
                   <Droplets className="h-4 w-4 text-blue-500" />
                   <div>
@@ -248,14 +245,23 @@ const WorldMap = () => {
                     <p className="text-xs text-gray-600">{currentData.climate.rainfall}</p>
                   </div>
                 </div>
+                <div className="flex items-center gap-2">
+                  <Wind className="h-4 w-4 text-gray-500" />
+                  <div>
+                    <h4 className="font-semibold text-gray-800 text-sm">Best Time</h4>
+                    <p className="text-xs text-gray-600">{currentData.climate.bestMonths.slice(0, 2).join(', ')}</p>
+                  </div>
+                </div>
+              </div>
 
-                <Separator />
+              <Separator />
 
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">
+                  <h4 className="font-semibold text-gray-800 mb-3">
                     {mode === 'fishing' ? 'Fish Species' : 'Game Animals'}
                   </h4>
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-2">
                     {(mode === 'fishing' ? currentData.fish : currentData.animals).map((species) => (
                       <Badge
                         key={species}
@@ -273,8 +279,8 @@ const WorldMap = () => {
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">Best Months</h4>
-                  <div className="flex flex-wrap gap-1">
+                  <h4 className="font-semibold text-gray-800 mb-3">Best Months</h4>
+                  <div className="flex flex-wrap gap-2">
                     {currentData.climate.bestMonths.map((month) => (
                       <Badge key={month} variant="outline" className="text-xs">
                         {month}
@@ -282,15 +288,17 @@ const WorldMap = () => {
                     ))}
                   </div>
                 </div>
+              </div>
 
-                <Separator />
+              <Separator />
 
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">Popular Locations</h4>
-                  <ul className="text-sm text-gray-600 space-y-1">
+                  <h4 className="font-semibold text-gray-800 mb-3">Popular Locations</h4>
+                  <ul className="text-sm text-gray-600 space-y-2">
                     {currentData.hotspots.map((spot) => (
                       <li key={spot} className="flex items-center gap-2">
-                        <MapPin className="h-3 w-3" />
+                        <MapPin className="h-3 w-3 flex-shrink-0" />
                         {spot}
                       </li>
                     ))}
@@ -298,42 +306,45 @@ const WorldMap = () => {
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">Regulations</h4>
+                  <h4 className="font-semibold text-gray-800 mb-3">Regulations</h4>
                   <p className="text-sm text-gray-600">
                     {mode === 'fishing' ? currentData.regulations.fishing : currentData.regulations.hunting}
                   </p>
                 </div>
+              </div>
 
-                <Separator />
+              <Separator />
 
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
-                    <Info className="h-4 w-4" />
-                    Available Data Sources
-                  </h4>
-                  <div className="space-y-2">
-                    {availableApis.slice(0, 3).map((api) => (
-                      <div key={api.name} className="text-sm p-2 bg-white rounded border">
-                        <div className="flex items-center justify-between">
-                          <span className="font-medium text-gray-800">{api.name}</span>
-                          <ExternalLink className="h-3 w-3 text-gray-400" />
-                        </div>
-                        <p className="text-xs text-gray-600 mt-1">{api.description}</p>
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                  <Info className="h-4 w-4" />
+                  Available Data Sources
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {availableApis.slice(0, 6).map((api) => (
+                    <div key={api.name} className="text-sm p-3 bg-white rounded border">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-medium text-gray-800">{api.name}</span>
+                        <ExternalLink className="h-3 w-3 text-gray-400" />
                       </div>
-                    ))}
-                    {availableApis.length > 3 && (
-                      <p className="text-xs text-gray-500">
-                        +{availableApis.length - 3} more data sources available
-                      </p>
-                    )}
-                  </div>
+                      <p className="text-xs text-gray-600">{api.description}</p>
+                    </div>
+                  ))}
                 </div>
+                {availableApis.length > 6 && (
+                  <p className="text-xs text-gray-500 mt-2">
+                    +{availableApis.length - 6} more data sources available
+                  </p>
+                )}
+              </div>
 
-                {mode === 'hunting' && (
+              {mode === 'hunting' && (
+                <>
+                  <Separator />
                   <div>
-                    <h4 className="font-semibold text-gray-800 mb-2">Also Available: Fishing</h4>
-                    <div className="flex flex-wrap gap-1">
-                      {currentData.fish.slice(0, 4).map((fish) => (
+                    <h4 className="font-semibold text-gray-800 mb-3">Also Available: Fishing</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {currentData.fish.slice(0, 6).map((fish) => (
                         <Badge
                           key={fish}
                           variant="outline"
@@ -344,15 +355,15 @@ const WorldMap = () => {
                       ))}
                     </div>
                   </div>
-                )}
-              </CardContent>
-            </Card>
-          </div>
-        )}
-      </div>
+                </>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
       {!selectedRegion && (
-        <div className="p-8 text-center text-gray-500">
+        <div className="p-8 text-center text-gray-500 border-t bg-gray-50">
           <MapPin className="h-16 w-16 mx-auto mb-4 text-gray-400" />
           <h3 className="text-lg font-semibold mb-2">Explore Regional Data</h3>
           <p className="text-sm">Click on any region marker to view comprehensive information about local species, seasons, regulations, and available data sources.</p>
