@@ -14,7 +14,7 @@ const Species = () => {
           locations: ['Norway', 'Scotland', 'Canada', 'Alaska'],
           bestTime: 'May to September',
           description: 'Prized for their fighting ability and excellent taste',
-          image: 'https://images.unsplash.com/photo-1518877593221-1f28583780b4?auto=format&fit=crop&w=400&q=80'
+          image: 'https://images.unsplash.com/photo-1544943910-4c1dc44aab44?auto=format&fit=crop&w=400&q=80'
         },
         {
           name: 'Largemouth Bass',
@@ -22,7 +22,7 @@ const Species = () => {
           locations: ['USA', 'Canada', 'Mexico', 'Japan'],
           bestTime: 'April to October',
           description: 'Popular game fish known for aggressive strikes',
-          image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=400&q=80'
+          image: 'https://images.unsplash.com/photo-1571769264071-95e8dfe5ca04?auto=format&fit=crop&w=400&q=80'
         },
         {
           name: 'Bluefin Tuna',
@@ -30,7 +30,31 @@ const Species = () => {
           locations: ['Mediterranean', 'Atlantic Ocean', 'Pacific Ocean'],
           bestTime: 'June to November',
           description: 'Massive pelagic fish highly valued for sashimi',
-          image: 'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?auto=format&fit=crop&w=400&q=80'
+          image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          name: 'Rainbow Trout',
+          scientificName: 'Oncorhynchus mykiss',
+          locations: ['North America', 'Europe', 'Asia', 'Australia'],
+          bestTime: 'March to November',
+          description: 'Beautiful freshwater fish with distinctive pink stripe',
+          image: 'https://images.unsplash.com/photo-1571769264071-95e8dfe5ca04?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          name: 'Northern Pike',
+          scientificName: 'Esox lucius',
+          locations: ['North America', 'Europe', 'Asia'],
+          bestTime: 'May to October',
+          description: 'Aggressive predator with razor-sharp teeth',
+          image: 'https://images.unsplash.com/photo-1571769264071-95e8dfe5ca04?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          name: 'Mahi-Mahi',
+          scientificName: 'Coryphaena hippurus',
+          locations: ['Tropical Atlantic', 'Pacific Ocean', 'Indian Ocean'],
+          bestTime: 'Year-round in tropics',
+          description: 'Colorful dolphinfish with excellent table fare',
+          image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=400&q=80'
         }
       ]
     : [
