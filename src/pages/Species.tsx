@@ -54,6 +54,30 @@ const Species = () => {
           bestTime: 'Year-round in tropics',
           description: 'Colorful dolphinfish with excellent table fare',
           image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          name: 'Striped Bass',
+          scientificName: 'Morone saxatilis',
+          locations: ['Atlantic Coast USA', 'Pacific Coast USA', 'Great Lakes'],
+          bestTime: 'April to November',
+          description: 'Popular sport fish with distinctive horizontal stripes',
+          image: 'https://images.unsplash.com/photo-1520637836862-4d197d17c0a4?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          name: 'Walleye',
+          scientificName: 'Sander vitreus',
+          locations: ['Northern USA', 'Canada', 'Great Lakes'],
+          bestTime: 'April to October',
+          description: 'Excellent eating fish with distinctive glassy eyes',
+          image: 'https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          name: 'Red Snapper',
+          scientificName: 'Lutjanus campechanus',
+          locations: ['Gulf of Mexico', 'Atlantic Ocean', 'Caribbean'],
+          bestTime: 'May to September',
+          description: 'Prized deep-water fish with distinctive red coloration',
+          image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=400&q=80'
         }
       ]
     : [
