@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import { MapPin } from 'lucide-react';
@@ -13,21 +12,21 @@ const Spots = () => {
           description: 'World-class coral reef fishing with incredible biodiversity',
           bestTime: 'April to November',
           species: ['Barramundi', 'Coral Trout', 'Mackerel'],
-          image: 'https://images.unsplash.com/photo-1518877593221-1f28583780b4?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1582967788606-a171c1080cb0?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Norwegian Fjords',
           description: 'Deep-water fishing in stunning natural landscapes',
           bestTime: 'May to September',
           species: ['Atlantic Salmon', 'Cod', 'Halibut'],
-          image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Costa Rica Pacific Coast',
           description: 'Sport fishing paradise with year-round opportunities',
           bestTime: 'Year-round',
           species: ['Marlin', 'Sailfish', 'Tuna'],
-          image: 'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?auto=format&fit=crop&w=800&q=80'
         }
       ]
     : [
@@ -36,21 +35,21 @@ const Spots = () => {
           description: 'Premier wildlife hunting in protected wilderness areas',
           bestTime: 'September to November',
           species: ['Elk', 'Bison', 'Deer'],
-          image: 'https://images.unsplash.com/photo-1493962853295-0fd70327578a?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Scottish Highlands',
           description: 'Traditional hunting grounds with rich heritage',
           bestTime: 'August to February',
           species: ['Red Deer', 'Roe Deer', 'Wild Boar'],
-          image: 'https://images.unsplash.com/photo-1439886183900-e79ec0057170?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Alberta, Canada',
           description: 'Vast wilderness perfect for big game hunting',
           bestTime: 'September to November',
           species: ['Moose', 'Black Bear', 'Whitetail Deer'],
-          image: 'https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80'
         }
       ];
 
