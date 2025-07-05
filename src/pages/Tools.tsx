@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { star } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 const Tools = () => {
   const { mode, themeColors } = useTheme();
@@ -169,12 +168,12 @@ const Tools = () => {
       <div className="flex items-center gap-1">
         {[...Array(5)].map((_, i) => (
           <div key={i} className="relative">
-            <star 
+            <Star 
               size={16} 
               className={`${i < fullStars ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
             />
             {hasHalfStar && i === fullStars && (
-              <star 
+              <Star 
                 size={16} 
                 className="absolute top-0 left-0 fill-yellow-400 text-yellow-400"
                 style={{ clipPath: 'polygon(0 0, 50% 0, 50% 100%, 0% 100%)' }}
