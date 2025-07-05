@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import { MapPin } from 'lucide-react';
@@ -81,6 +80,54 @@ const Species = () => {
           bestTime: 'Year-round',
           description: 'Challenging and dangerous game requiring skill',
           image: 'https://images.unsplash.com/photo-1485833077593-4278bba3f11f?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          name: 'Moose',
+          scientificName: 'Alces alces',
+          locations: ['Alaska', 'Canada', 'Northern USA', 'Scandinavia'],
+          bestTime: 'September to October',
+          description: 'Largest member of the deer family, impressive antlers',
+          image: 'https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          name: 'Black Bear',
+          scientificName: 'Ursus americanus',
+          locations: ['North America', 'Canada', 'Alaska'],
+          bestTime: 'Spring and Fall',
+          description: 'Adaptable omnivore found in various habitats',
+          image: 'https://images.unsplash.com/photo-1452960962994-acf4fd70b632?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          name: 'Mule Deer',
+          scientificName: 'Odocoileus hemionus',
+          locations: ['Western North America', 'Mexico'],
+          bestTime: 'October to December',
+          description: 'Distinguished by large ears and black-tipped tail',
+          image: 'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          name: 'Pronghorn Antelope',
+          scientificName: 'Antilocapra americana',
+          locations: ['Western USA', 'Mexico', 'Southern Canada'],
+          bestTime: 'August to October',
+          description: 'Fastest land animal in North America',
+          image: 'https://images.unsplash.com/photo-1517022812141-23620dba5c23?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          name: 'Mountain Goat',
+          scientificName: 'Oreamnos americanus',
+          locations: ['Rocky Mountains', 'Alaska', 'Western Canada'],
+          bestTime: 'August to November',
+          description: 'Sure-footed climber of steep mountain terrain',
+          image: 'https://images.unsplash.com/photo-1498936178812-4b2e558d2937?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          name: 'Bighorn Sheep',
+          scientificName: 'Ovis canadensis',
+          locations: ['Western North America', 'Rocky Mountains'],
+          bestTime: 'September to December',
+          description: 'Known for their impressive curved horns',
+          image: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?auto=format&fit=crop&w=400&q=80'
         }
       ];
 
