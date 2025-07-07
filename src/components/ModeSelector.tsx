@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
-import { Fish, Map } from 'lucide-react';
+import { Fish, Target } from 'lucide-react';
 
 const ModeSelector = () => {
   const { setMode } = useTheme();
@@ -54,7 +54,7 @@ const ModeSelector = () => {
           >
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
               <div className="h-64 bg-gradient-to-br from-green-600 to-amber-600 flex items-center justify-center">
-                <Map className="h-24 w-24 text-white" />
+                <Target className="h-24 w-24 text-white" />
               </div>
               <div className="p-8">
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">Hunting</h2>
