@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
-import { ArrowRight, Map } from 'lucide-react';
+import { ArrowRight, Fish, Target } from 'lucide-react';
 
 const HomePage = () => {
   const { mode, themeColors } = useTheme();
@@ -14,10 +14,10 @@ const HomePage = () => {
         title: 'Master the Art of Fishing',
         subtitle: 'Discover the world\'s best fishing destinations and techniques',
         features: [
-          { title: 'Global Fishing Spots', desc: 'Top-rated locations worldwide', link: '/spots' },
-          { title: 'Professional Tools', desc: 'Essential gear and equipment', link: '/tools' },
-          { title: 'Seasonal Guide', desc: 'Best times to fish', link: '/seasons' },
-          { title: 'Fish Species', desc: 'Comprehensive species database', link: '/species' }
+          { title: 'Global Fishing Spots', desc: 'Top-rated locations worldwide', link: '/spots', icon: Fish },
+          { title: 'Professional Tools', desc: 'Essential gear and equipment', link: '/tools', icon: Fish },
+          { title: 'Seasonal Guide', desc: 'Best times to fish', link: '/seasons', icon: Fish },
+          { title: 'Fish Species', desc: 'Comprehensive species database', link: '/species', icon: Fish }
         ],
         bgImage: 'https://images.unsplash.com/photo-1518877593221-1f28583780b4?auto=format&fit=crop&w=1920&q=80'
       }
@@ -25,10 +25,10 @@ const HomePage = () => {
         title: 'Experience the Thrill of Hunting',
         subtitle: 'Explore premier hunting grounds and wildlife tracking',
         features: [
-          { title: 'Prime Hunting Areas', desc: 'Best locations by region', link: '/areas' },
-          { title: 'Legal Weapons', desc: 'Approved hunting equipment', link: '/weapons' },
-          { title: 'Hunting Seasons', desc: 'Optimal hunting periods', link: '/seasons' },
-          { title: 'Wildlife Guide', desc: 'Animal behavior and habitats', link: '/animals' }
+          { title: 'Prime Hunting Areas', desc: 'Best locations by region', link: '/areas', icon: Target },
+          { title: 'Legal Weapons', desc: 'Approved hunting equipment', link: '/weapons', icon: Target },
+          { title: 'Hunting Seasons', desc: 'Optimal hunting periods', link: '/seasons', icon: Target },
+          { title: 'Wildlife Guide', desc: 'Animal behavior and habitats', link: '/animals', icon: Target }
         ],
         bgImage: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1920&q=80'
       };
@@ -71,23 +71,26 @@ const HomePage = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {content.features.map((feature, index) => (
-              <Link
-                key={feature.title}
-                to={feature.link}
-                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow group"
-              >
-                <div className={`w-12 h-12 bg-gradient-to-r ${themeColors.gradient} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                  <Map className="h-6 w-6 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600">
-                  {feature.desc}
-                </p>
-              </Link>
-            ))}
+            {content.features.map((feature, index) => {
+              const IconComponent = feature.icon;
+              return (
+                <Link
+                  key={feature.title}
+                  to={feature.link}
+                  className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow group"
+                >
+                  <div className={`w-12 h-12 bg-gradient-to-r ${themeColors.gradient} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                    <IconComponent className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600">
+                    {feature.desc}
+                  </p>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>
