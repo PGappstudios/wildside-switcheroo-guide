@@ -15,7 +15,7 @@ const Spots = () => {
           species: ['Barramundi', 'Coral Trout', 'Spanish Mackerel', 'Giant Trevally'],
           temperature: '24-28°C',
           difficulty: 'Intermediate',
-          image: 'https://images.unsplash.com/photo-1582967788606-a171c1080cb0?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Norwegian Fjords',
@@ -24,7 +24,7 @@ const Spots = () => {
           species: ['Atlantic Salmon', 'Arctic Cod', 'Halibut', 'Sea Trout'],
           temperature: '8-15°C',
           difficulty: 'Advanced',
-          image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Costa Rica Pacific Coast',
@@ -33,7 +33,7 @@ const Spots = () => {
           species: ['Blue Marlin', 'Sailfish', 'Yellowfin Tuna', 'Dorado'],
           temperature: '26-30°C',
           difficulty: 'Intermediate',
-          image: 'https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?auto=format&fit=crop&w=800&q=80'
+          image: '#000000'
         },
         {
           name: 'Alaska Wilderness',
@@ -42,7 +42,7 @@ const Spots = () => {
           species: ['King Salmon', 'Sockeye Salmon', 'Rainbow Trout', 'Arctic Char'],
           temperature: '10-18°C',
           difficulty: 'Advanced',
-          image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Maldives Atolls',
@@ -51,7 +51,7 @@ const Spots = () => {
           species: ['Giant Trevally', 'Wahoo', 'Barracuda', 'Mahi-Mahi'],
           temperature: '27-30°C',
           difficulty: 'Beginner',
-          image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Amazon Basin, Brazil',
@@ -60,7 +60,7 @@ const Spots = () => {
           species: ['Peacock Bass', 'Piranha', 'Arapaima', 'Catfish'],
           temperature: '25-32°C',
           difficulty: 'Intermediate',
-          image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Florida Keys, USA',
@@ -69,7 +69,7 @@ const Spots = () => {
           species: ['Tarpon', 'Bonefish', 'Permit', 'Snook'],
           temperature: '22-28°C',
           difficulty: 'Advanced',
-          image: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'New Zealand South Island',
@@ -78,7 +78,7 @@ const Spots = () => {
           species: ['Brown Trout', 'Rainbow Trout', 'Salmon', 'Quinnat Salmon'],
           temperature: '12-22°C',
           difficulty: 'Intermediate',
-          image: 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Seychelles Islands',
@@ -87,7 +87,7 @@ const Spots = () => {
           species: ['Sailfish', 'Marlin', 'Tuna', 'Bonito'],
           temperature: '26-30°C',
           difficulty: 'Intermediate',
-          image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1544552866-d3ed42536cfd?auto=format&fit=crop&w=800&q=80'
         }
       ]
     : [
@@ -98,7 +98,7 @@ const Spots = () => {
           species: ['Elk', 'Bison', 'Mule Deer', 'Pronghorn'],
           temperature: '5-15°C',
           difficulty: 'Advanced',
-          image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Scottish Highlands',
@@ -107,7 +107,7 @@ const Spots = () => {
           species: ['Red Deer', 'Roe Deer', 'Grouse', 'Ptarmigan'],
           temperature: '2-12°C',
           difficulty: 'Intermediate',
-          image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Alberta, Canada',
@@ -116,7 +116,7 @@ const Spots = () => {
           species: ['Moose', 'Black Bear', 'Whitetail Deer', 'Caribou'],
           temperature: '0-18°C',
           difficulty: 'Advanced',
-          image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Patagonia, Argentina',
@@ -125,7 +125,7 @@ const Spots = () => {
           species: ['Red Deer', 'Wild Boar', 'Water Buffalo', 'Axis Deer'],
           temperature: '8-20°C',
           difficulty: 'Intermediate',
-          image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Namibian Kalahari',
@@ -134,7 +134,7 @@ const Spots = () => {
           species: ['Gemsbok', 'Springbok', 'Kudu', 'Warthog'],
           temperature: '15-35°C',
           difficulty: 'Advanced',
-          image: 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Russian Siberia',
@@ -143,7 +143,7 @@ const Spots = () => {
           species: ['Brown Bear', 'Wild Boar', 'Red Deer', 'Roe Deer'],
           temperature: '-5-15°C',
           difficulty: 'Expert',
-          image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80'
+          image: '#000000'
         },
         {
           name: 'Texas Hill Country, USA',
@@ -152,7 +152,7 @@ const Spots = () => {
           species: ['Whitetail Deer', 'Axis Deer', 'Wild Turkey', 'Nilgai'],
           temperature: '10-25°C',
           difficulty: 'Beginner',
-          image: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'New Zealand High Country',
@@ -161,7 +161,7 @@ const Spots = () => {
           species: ['Red Deer', 'Tahr', 'Chamois', 'Wild Goat'],
           temperature: '5-18°C',
           difficulty: 'Advanced',
-          image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
         },
         {
           name: 'Mongolian Steppes',
@@ -170,7 +170,7 @@ const Spots = () => {
           species: ['Marco Polo Sheep', 'Ibex', 'Argali Sheep', 'Wolf'],
           temperature: '-10-20°C',
           difficulty: 'Expert',
-          image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80'
+          image: '#000000'
         }
       ];
 
@@ -209,11 +209,15 @@ const Spots = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {spots.map((spot, index) => (
             <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              <img
-                src={spot.image}
-                alt={spot.name}
-                className="w-full h-48 object-cover"
-              />
+              {spot.image === '#000000' ? (
+                <div className="w-full h-48 bg-black"></div>
+              ) : (
+                <img
+                  src={spot.image}
+                  alt={spot.name}
+                  className="w-full h-48 object-cover"
+                />
+              )}
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center">
