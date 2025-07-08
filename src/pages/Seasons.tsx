@@ -1,9 +1,35 @@
 
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
+import SEO from '../components/SEO';
 
 const Seasons = () => {
   const { mode, themeColors } = useTheme();
+
+  const seoData = mode === 'fishing'
+    ? {
+        title: 'Fishing Seasons Guide - When to Fish for Best Results | Wildside Guide',
+        description: 'Complete fishing seasons guide with optimal fishing times, species availability, and expert tips for each season. Maximize your fishing success year-round.',
+        keywords: 'fishing seasons, best fishing times, seasonal fishing guide, fishing calendar, when to fish, fishing by season'
+      }
+    : {
+        title: 'Hunting Seasons Guide - Optimal Hunting Times | Wildside Guide',
+        description: 'Comprehensive hunting seasons guide with prime hunting times, species availability, and seasonal strategies. Plan your hunting trips for maximum success.',
+        keywords: 'hunting seasons, hunting calendar, best hunting times, seasonal hunting guide, when to hunt, hunting by season'
+      };
+
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": seoData.title,
+    "description": seoData.description,
+    "url": "https://wildside-guide.com/seasons",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Wildside Guide",
+      "url": "https://wildside-guide.com"
+    }
+  };
 
   const seasons = mode === 'fishing' 
     ? [
@@ -69,6 +95,16 @@ const Seasons = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        canonical="https://wildside-guide.com/seasons"
+        ogTitle={seoData.title}
+        ogDescription={seoData.description}
+        schemaData={schemaData}
+      />
+
       <div className={`bg-gradient-to-r ${themeColors.gradient} text-white py-20`}>
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-4">

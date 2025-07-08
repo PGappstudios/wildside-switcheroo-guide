@@ -1,9 +1,35 @@
 
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
+import SEO from '../components/SEO';
 
 const Regulations = () => {
   const { mode, themeColors } = useTheme();
+
+  const seoData = mode === 'fishing'
+    ? {
+        title: 'Fishing Regulations & Laws - Stay Legal While Fishing | Wildside Guide',
+        description: 'Complete fishing regulations guide covering licenses, limits, and laws. Stay legal and fish responsibly with our comprehensive regulatory information.',
+        keywords: 'fishing regulations, fishing laws, fishing licenses, bag limits, fishing permits, legal fishing requirements'
+      }
+    : {
+        title: 'Hunting Regulations & Laws - Legal Hunting Guide | Wildside Guide',
+        description: 'Comprehensive hunting regulations guide covering licenses, seasons, and legal requirements. Hunt safely and within the law with expert guidance.',
+        keywords: 'hunting regulations, hunting laws, hunting licenses, hunting permits, legal hunting requirements, hunting safety'
+      };
+
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": seoData.title,
+    "description": seoData.description,
+    "url": "https://wildside-guide.com/regulations",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Wildside Guide",
+      "url": "https://wildside-guide.com"
+    }
+  };
 
   const regulations = mode === 'fishing' 
     ? [
@@ -43,6 +69,16 @@ const Regulations = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        canonical="https://wildside-guide.com/regulations"
+        ogTitle={seoData.title}
+        ogDescription={seoData.description}
+        schemaData={schemaData}
+      />
+
       <div className={`bg-gradient-to-r ${themeColors.gradient} text-white py-20`}>
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-4">

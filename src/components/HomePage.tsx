@@ -44,13 +44,18 @@ const HomePage = () => {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": mode === 'fishing' ? "Fishing Guide" : "Hunting Guide",
+    "name": mode === 'fishing' ? "Wildside Fishing Guide" : "Wildside Hunting Guide",
     "description": content.description,
     "url": "https://wildside-guide.com",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Wildside Guide",
+      "description": "Premier outdoor adventure guide platform"
+    },
     "mainEntity": {
       "@type": "Organization",
       "name": "Wildside Guide",
-      "description": `Ultimate ${mode} resource and guide`
+      "description": `Ultimate ${mode} resource and guide for outdoor enthusiasts`
     }
   };
 
@@ -63,7 +68,7 @@ const HomePage = () => {
         canonical="https://wildside-guide.com"
         ogTitle={content.title}
         ogDescription={content.description}
-        ogImage="https://wildside-guide.com/images/og-image.jpg"
+        ogImage="https://wildside-guide.com/images/wildside-og-image.jpg"
         schemaData={schemaData}
       />
 
