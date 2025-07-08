@@ -3,9 +3,22 @@ import { useTheme } from '../contexts/ThemeContext';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Star } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const Tools = () => {
   const { mode, themeColors } = useTheme();
+
+  const seoData = mode === 'fishing'
+    ? {
+        title: 'Best Fishing Gear & Equipment Reviews | Top-Rated Tools 2024',
+        description: 'Discover the best fishing gear and equipment. Expert reviews of top-rated rods, reels, tackle, and accessories from trusted brands on Amazon.',
+        keywords: 'fishing gear, fishing equipment, fishing rods, fishing reels, fishing tackle, best fishing tools, fishing gear reviews'
+      }
+    : {
+        title: 'Best Hunting Gear & Equipment Reviews | Top-Rated Tools 2024',
+        description: 'Discover the best hunting gear and equipment. Expert reviews of top-rated apparel, weapons, and accessories from trusted brands on Amazon.',
+        keywords: 'hunting gear, hunting equipment, hunting apparel, hunting tools, best hunting gear, hunting gear reviews'
+      };
 
   const fishingProducts = [
     {
@@ -186,9 +199,37 @@ const Tools = () => {
     );
   };
 
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `Best ${mode === 'fishing' ? 'Fishing' : 'Hunting'} Products`,
+    "description": seoData.description,
+    "numberOfItems": products.length,
+    "itemListElement": products.map((product, index) => ({
+      "@type": "Product",
+      "position": index + 1,
+      "name": product.name,
+      "offers": {
+        "@type": "Offer",
+        "price": product.price,
+        "availability": product.soldOut ? "https://schema.org/OutOfStock" : "https://schema.org/InStock"
+      }
+    }))
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className={`bg-gradient-to-r ${themeColors.gradient} text-white py-20`}>
+      <SEO
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        canonical={`https://wildside-guide.com/${mode === 'fishing' ? 'tools' : 'weapons'}`}
+        ogTitle={seoData.title}
+        ogDescription={seoData.description}
+        schemaData={schemaData}
+      />
+
+      <header className={`bg-gradient-to-r ${themeColors.gradient} text-white py-20`}>
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-4">
             {mode === 'fishing' ? 'Best-Selling Fishing Products' : 'Best-Selling Hunting Products'}
@@ -200,9 +241,9 @@ const Tools = () => {
             }
           </p>
         </div>
-      </div>
+      </header>
 
-      <div className="container mx-auto px-4 py-16">
+      <main className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product, index) => (
             <Card key={index} className="hover:shadow-xl transition-shadow duration-300 relative">
@@ -241,7 +282,7 @@ const Tools = () => {
             </Card>
           ))}
         </div>
-      </div>
+      </main>
     </div>
   );
 };

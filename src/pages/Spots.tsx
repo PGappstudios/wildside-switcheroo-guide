@@ -2,9 +2,26 @@ import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import { MapPin, Fish, Calendar, Thermometer } from 'lucide-react';
 import AdBanner from '../components/AdBanner';
+import SEO from '../components/SEO';
 
 const Spots = () => {
   const { mode, themeColors } = useTheme();
+
+  const seoData = mode === 'fishing' 
+    ? {
+        title: 'Best Fishing Spots Worldwide - Top 9 Destinations | Wildside Guide',
+        description: 'Discover the world\'s 9 best fishing destinations. From Great Barrier Reef to Norwegian Fjords, find your perfect fishing adventure with detailed guides.',
+        keywords: 'best fishing spots, top fishing destinations, fishing locations, world fishing guide, fishing travel, fishing spots worldwide',
+        h1: '9 Best Fishing Spots Worldwide',
+        subtitle: 'Discover world-renowned fishing destinations across the globe'
+      }
+    : {
+        title: 'Premier Hunting Areas Worldwide - Top 9 Destinations | Wildside Guide',
+        description: 'Explore the world\'s 9 premier hunting locations. From Yellowstone to Patagonia, discover prime hunting grounds with expert guides and tips.',
+        keywords: 'best hunting areas, top hunting destinations, hunting locations, world hunting guide, hunting travel, hunting spots worldwide',
+        h1: '9 Premier Hunting Areas Worldwide',
+        subtitle: 'Explore top hunting locations spanning six continents'
+      };
 
   const spots = mode === 'fishing' 
     ? [
@@ -189,28 +206,60 @@ const Spots = () => {
     }
   };
 
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": seoData.h1,
+    "description": seoData.description,
+    "author": {
+      "@type": "Organization",
+      "name": "Wildside Guide"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Wildside Guide"
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": spots.length,
+      "itemListElement": spots.map((spot, index) => ({
+        "@type": "Place",
+        "position": index + 1,
+        "name": spot.name,
+        "description": spot.description
+      }))
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className={`bg-gradient-to-r ${themeColors.gradient} text-white py-20`}>
+      <SEO
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        canonical={`https://wildside-guide.com/${mode === 'fishing' ? 'spots' : 'areas'}`}
+        ogTitle={seoData.title}
+        ogDescription={seoData.description}
+        schemaData={schemaData}
+      />
+
+      <header className={`bg-gradient-to-r ${themeColors.gradient} text-white py-20`}>
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-4">
-            {mode === 'fishing' ? '9 Best Fishing Spots' : '9 Premier Hunting Areas'}
+            {seoData.h1}
           </h1>
           <p className="text-xl">
-            {mode === 'fishing' 
-              ? 'Discover world-renowned fishing destinations across the globe' 
-              : 'Explore top hunting locations spanning six continents'
-            }
+            {seoData.subtitle}
           </p>
         </div>
-      </div>
+      </header>
 
       {/* Top Ad Banner */}
       <div className="container mx-auto px-4 py-8">
         <AdBanner size="leaderboard" />
       </div>
 
-      <div className="container mx-auto px-4 pb-16">
+      <main className="container mx-auto px-4 pb-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {spots.map((spot, index) => (
             <React.Fragment key={index}>
@@ -221,13 +270,13 @@ const Spots = () => {
                 </div>
               )}
               
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <article className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 {spot.image === '#000000' ? (
                   <div className="w-full h-48 bg-black"></div>
                 ) : (
                   <img
                     src={spot.image}
-                    alt={spot.name}
+                    alt={`${spot.name} - ${mode === 'fishing' ? 'Fishing' : 'Hunting'} destination`}
                     className="w-full h-48 object-cover"
                   />
                 )}
@@ -235,9 +284,9 @@ const Spots = () => {
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center">
                       <MapPin className="h-5 w-5 text-red-500 mr-2" />
-                      <h3 className="text-xl font-semibold text-gray-800">
+                      <h2 className="text-xl font-semibold text-gray-800">
                         {spot.name}
-                      </h3>
+                      </h2>
                     </div>
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${getDifficultyColor(spot.difficulty)}`}>
                       {spot.difficulty}
@@ -281,7 +330,7 @@ const Spots = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </article>
             </React.Fragment>
           ))}
         </div>
@@ -290,7 +339,7 @@ const Spots = () => {
         <div className="mt-12">
           <AdBanner size="leaderboard" />
         </div>
-      </div>
+      </main>
     </div>
   );
 };

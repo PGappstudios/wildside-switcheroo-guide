@@ -1,9 +1,23 @@
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import { MapPin } from 'lucide-react';
+import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const Species = () => {
   const { mode, themeColors } = useTheme();
+
+  const seoData = mode === 'fishing'
+    ? {
+        title: 'Complete Fish Species Guide - Identification & Locations | Wildside Guide',
+        description: 'Comprehensive database of fish species with detailed information on habitats, best fishing times, and locations. Expert guide to identifying fish worldwide.',
+        keywords: 'fish species, fish identification, fish guide, fish database, fishing species, fish habitats, fish locations'
+      }
+    : {
+        title: 'Complete Wildlife Guide - Hunting Species & Habitats | Wildside Guide',
+        description: 'Detailed information about hunting wildlife species, their habitats, behavior, and best hunting times. Comprehensive guide to game animals worldwide.',
+        keywords: 'hunting wildlife, game species, hunting animals, wildlife guide, hunting species, animal habitats, hunting database'
+      };
 
   const species = mode === 'fishing' 
     ? [
@@ -155,9 +169,36 @@ const Species = () => {
         }
       ];
 
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `${mode === 'fishing' ? 'Fish' : 'Wildlife'} Species Guide`,
+    "description": seoData.description,
+    "numberOfItems": species.length,
+    "itemListElement": species.map((item, index) => ({
+      "@type": mode === 'fishing' ? "Animal" : "Animal",
+      "position": index + 1,
+      "name": item.name,
+      "description": item.description,
+      "scientificName": item.scientificName
+    }))
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className={`bg-gradient-to-r ${themeColors.gradient} text-white py-20`}>
+      <SEO
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        canonical={`https://wildside-guide.com/${mode === 'fishing' ? 'species' : 'animals'}`}
+        ogTitle={seoData.title}
+        ogDescription={seoData.description}
+        schemaData={schemaData}
+      />
+      
+      <Breadcrumbs />
+
+      <header className={`bg-gradient-to-r ${themeColors.gradient} text-white py-20`}>
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-4">
             {mode === 'fishing' ? 'Fish Species Guide' : 'Wildlife Guide'}
@@ -169,21 +210,21 @@ const Species = () => {
             }
           </p>
         </div>
-      </div>
+      </header>
 
-      <div className="container mx-auto px-4 py-16">
+      <main className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {species.map((item, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            <article key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
               <img
                 src={item.image}
-                alt={item.name}
+                alt={`${item.name} - ${item.scientificName}`}
                 className="w-full h-48 object-cover"
               />
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-800 mb-1">
+                <h2 className="text-2xl font-bold text-gray-800 mb-1">
                   {item.name}
-                </h3>
+                </h2>
                 <p className="text-gray-500 italic mb-4">
                   {item.scientificName}
                 </p>
@@ -215,10 +256,10 @@ const Species = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
-      </div>
+      </main>
     </div>
   );
 };
