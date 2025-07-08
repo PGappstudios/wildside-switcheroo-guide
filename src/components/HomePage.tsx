@@ -1,8 +1,8 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
 import { ArrowRight, Fish, Target } from 'lucide-react';
+import AdBanner from './AdBanner';
 
 const HomePage = () => {
   const { mode, themeColors } = useTheme();
@@ -58,6 +58,13 @@ const HomePage = () => {
         </div>
       </div>
 
+      {/* Top Ad Banner */}
+      <div className="py-8 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <AdBanner size="leaderboard" />
+        </div>
+      </div>
+
       {/* Features Grid */}
       <div className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -92,6 +99,18 @@ const HomePage = () => {
               );
             })}
           </div>
+
+          {/* Middle Ad Banner */}
+          <div className="mt-16 mb-8">
+            <AdBanner size="large-banner" />
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Ad Banner */}
+      <div className="py-8 bg-white">
+        <div className="container mx-auto px-4">
+          <AdBanner size="leaderboard" />
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import { MapPin, Fish, Calendar, Thermometer } from 'lucide-react';
+import AdBanner from '../components/AdBanner';
 
 const Spots = () => {
   const { mode, themeColors } = useTheme();
@@ -205,71 +205,90 @@ const Spots = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-16">
+      {/* Top Ad Banner */}
+      <div className="container mx-auto px-4 py-8">
+        <AdBanner size="leaderboard" />
+      </div>
+
+      <div className="container mx-auto px-4 pb-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {spots.map((spot, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              {spot.image === '#000000' ? (
-                <div className="w-full h-48 bg-black"></div>
-              ) : (
-                <img
-                  src={spot.image}
-                  alt={spot.name}
-                  className="w-full h-48 object-cover"
-                />
-              )}
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center">
-                    <MapPin className="h-5 w-5 text-red-500 mr-2" />
-                    <h3 className="text-xl font-semibold text-gray-800">
-                      {spot.name}
-                    </h3>
-                  </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${getDifficultyColor(spot.difficulty)}`}>
-                    {spot.difficulty}
-                  </span>
+            <React.Fragment key={index}>
+              {/* Ad banner after every 3 spots */}
+              {index > 0 && index % 3 === 0 && (
+                <div className="col-span-full my-8">
+                  <AdBanner size="large-banner" />
                 </div>
-                
-                <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                  {spot.description}
-                </p>
-                
-                <div className="space-y-3">
-                  <div className="flex items-center text-sm">
-                    <Calendar className="h-4 w-4 text-blue-500 mr-2" />
-                    <span className="font-medium text-gray-700">Best Time: </span>
-                    <span className="text-gray-600 ml-1">{spot.bestTime}</span>
-                  </div>
-                  
-                  <div className="flex items-center text-sm">
-                    <Thermometer className="h-4 w-4 text-orange-500 mr-2" />
-                    <span className="font-medium text-gray-700">Temperature: </span>
-                    <span className="text-gray-600 ml-1">{spot.temperature}</span>
-                  </div>
-                  
-                  <div>
-                    <div className="flex items-center mb-2">
-                      <Fish className={`h-4 w-4 mr-2 ${mode === 'fishing' ? 'text-blue-500' : 'text-green-500'}`} />
-                      <span className="font-medium text-gray-700 text-sm">
-                        {mode === 'fishing' ? 'Target Species:' : 'Wildlife:'}
-                      </span>
+              )}
+              
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                {spot.image === '#000000' ? (
+                  <div className="w-full h-48 bg-black"></div>
+                ) : (
+                  <img
+                    src={spot.image}
+                    alt={spot.name}
+                    className="w-full h-48 object-cover"
+                  />
+                )}
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center">
+                      <MapPin className="h-5 w-5 text-red-500 mr-2" />
+                      <h3 className="text-xl font-semibold text-gray-800">
+                        {spot.name}
+                      </h3>
                     </div>
-                    <div className="flex flex-wrap gap-1">
-                      {spot.species.map((species) => (
-                        <span
-                          key={species}
-                          className={`${themeColors.secondary} px-2 py-1 rounded text-xs font-medium`}
-                        >
-                          {species}
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${getDifficultyColor(spot.difficulty)}`}>
+                      {spot.difficulty}
+                    </span>
+                  </div>
+                  
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                    {spot.description}
+                  </p>
+                  
+                  <div className="space-y-3">
+                    <div className="flex items-center text-sm">
+                      <Calendar className="h-4 w-4 text-blue-500 mr-2" />
+                      <span className="font-medium text-gray-700">Best Time: </span>
+                      <span className="text-gray-600 ml-1">{spot.bestTime}</span>
+                    </div>
+                    
+                    <div className="flex items-center text-sm">
+                      <Thermometer className="h-4 w-4 text-orange-500 mr-2" />
+                      <span className="font-medium text-gray-700">Temperature: </span>
+                      <span className="text-gray-600 ml-1">{spot.temperature}</span>
+                    </div>
+                    
+                    <div>
+                      <div className="flex items-center mb-2">
+                        <Fish className={`h-4 w-4 mr-2 ${mode === 'fishing' ? 'text-blue-500' : 'text-green-500'}`} />
+                        <span className="font-medium text-gray-700 text-sm">
+                          {mode === 'fishing' ? 'Target Species:' : 'Wildlife:'}
                         </span>
-                      ))}
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {spot.species.map((species) => (
+                          <span
+                            key={species}
+                            className={`${themeColors.secondary} px-2 py-1 rounded text-xs font-medium`}
+                          >
+                            {species}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </React.Fragment>
           ))}
+        </div>
+
+        {/* Bottom Ad Banner */}
+        <div className="mt-12">
+          <AdBanner size="leaderboard" />
         </div>
       </div>
     </div>
