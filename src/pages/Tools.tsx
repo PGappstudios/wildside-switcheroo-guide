@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import { Button } from '../components/ui/button';
@@ -29,20 +30,6 @@ const Tools = () => {
       soldOut: false
     },
     {
-      name: 'Dobyns Fury Series Casting Rod',
-      price: 'From $149.99',
-      rating: 5.0,
-      votes: 10,
-      soldOut: true
-    },
-    {
-      name: 'Dobyns Fury Series Spinning Rod',
-      price: '$149.99',
-      rating: 4.0,
-      votes: 4,
-      soldOut: true
-    },
-    {
       name: 'Fishing Online Custom Chinook PFD',
       price: '$89.95',
       rating: 5.0,
@@ -55,13 +42,6 @@ const Tools = () => {
       rating: 5.0,
       votes: 18,
       soldOut: false
-    },
-    {
-      name: 'Hawg Trough Measuring Board (Pre-lined & Floating)',
-      price: 'From $21.99',
-      rating: 4.8,
-      votes: 596,
-      soldOut: true
     },
     {
       name: 'Ketch Karbonate Measuring Board',
@@ -166,7 +146,10 @@ const Tools = () => {
     }
   ];
 
-  const products = mode === 'fishing' ? fishingProducts : huntingProducts;
+  // Filter out sold out products
+  const availableFishingProducts = fishingProducts.filter(product => !product.soldOut);
+  const availableHuntingProducts = huntingProducts.filter(product => !product.soldOut);
+  const products = mode === 'fishing' ? availableFishingProducts : availableHuntingProducts;
 
   const handleViewOnAmazon = (productName: string) => {
     const searchQuery = encodeURIComponent(productName);
@@ -213,7 +196,7 @@ const Tools = () => {
       "offers": {
         "@type": "Offer",
         "price": product.price,
-        "availability": product.soldOut ? "https://schema.org/OutOfStock" : "https://schema.org/InStock"
+        "availability": "https://schema.org/InStock"
       }
     }))
   };
@@ -247,12 +230,7 @@ const Tools = () => {
       <main className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product, index) => (
-            <Card key={index} className="hover:shadow-xl transition-shadow duration-300 relative">
-              {product.soldOut && (
-                <div className="absolute top-4 right-4 bg-red-500 text-white px-2 py-1 rounded text-xs font-medium z-10">
-                  Sold Out
-                </div>
-              )}
+            <Card key={index} className="hover:shadow-xl transition-shadow duration-300">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg leading-tight text-gray-800">
                   {product.name}
@@ -275,9 +253,8 @@ const Tools = () => {
                 <Button 
                   className={`w-full ${themeColors.accent} hover:opacity-90 transition-opacity`}
                   onClick={() => handleViewOnAmazon(product.name)}
-                  disabled={product.soldOut}
                 >
-                  {product.soldOut ? 'Currently Unavailable' : 'View on Amazon'}
+                  View on Amazon
                 </Button>
               </CardContent>
             </Card>
