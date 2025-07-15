@@ -22,20 +22,20 @@ const Tools = () => {
 
   const fishingProducts = [
     {
-      name: 'Anchor Wizard Low Profile Kayak Anchor System',
-      price: 'From $99.99',
+      name: 'Gradient Fitness Kayak Anchor Kit | Paddle Board Accessories',
+      price: 'From $35.99',
       rating: 4.9,
       votes: 87,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/81JVMnZu+jL._AC_SL1500_.jpg'
     },
     {
-      name: 'Fishing Online Custom Chinook PFD',
-      price: '$89.95',
+      name: 'Stohlquist Edge Personal Flotation Device',
+      price: '$84.95',
       rating: 5.0,
       votes: 12,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/81jYVZJzx-L._AC_SL1500_.jpg'
     },
     {
       name: 'FishOn Tungsten Worm Weights',
@@ -43,7 +43,7 @@ const Tools = () => {
       rating: 5.0,
       votes: 18,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/51gEqn2xwOL._AC_SL1500_.jpg'
     },
     {
       name: 'Ketch Karbonate Measuring Board',
