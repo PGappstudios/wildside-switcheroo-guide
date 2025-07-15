@@ -246,7 +246,7 @@ const Tools = () => {
       <main className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product, index) => (
-            <Card key={index} className="hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+            <Card key={index} className="hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full">
               <div className="aspect-[4/3] overflow-hidden">
                 <img 
                   src={product.image} 
@@ -254,7 +254,7 @@ const Tools = () => {
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
               </div>
-              <CardHeader className="pb-3">
+              <CardHeader className="pb-3 flex-shrink-0">
                 <CardTitle className="text-lg leading-tight text-gray-800">
                   {product.name}
                 </CardTitle>
@@ -264,7 +264,7 @@ const Tools = () => {
                   </span>
                 </div>
               </CardHeader>
-              <CardContent className="pt-0">
+              <CardContent className="pt-0 flex-grow flex flex-col justify-between">
                 <div className="flex items-center justify-between mb-4">
                   {product.rating && (
                     <StarRating rating={product.rating} />
@@ -274,7 +274,7 @@ const Tools = () => {
                   </span>
                 </div>
                 <Button 
-                  className={`w-full ${themeColors.accent} hover:opacity-90 transition-opacity`}
+                  className={`w-full ${themeColors.accent} hover:opacity-90 transition-opacity mt-auto`}
                   onClick={() => handleViewOnAmazon(product.name)}
                 >
                   View on Amazon
