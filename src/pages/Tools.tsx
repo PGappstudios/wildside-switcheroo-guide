@@ -31,51 +31,51 @@ const Tools = () => {
     },
     {
       name: 'Stohlquist Edge Personal Flotation Device',
-      price: '$84.95',
+      price: 'From $84.95',
       rating: 5.0,
       votes: 12,
       soldOut: false,
       image: 'https://m.media-amazon.com/images/I/81jYVZJzx-L._AC_SL1500_.jpg'
     },
     {
-      name: 'FishOn Tungsten Worm Weights',
-      price: 'From $1.99',
+      name: '12 Pack Tungsten Bullet Fishing Weights, Insert Free Worm Sinkers',
+      price: 'From $16.99',
       rating: 5.0,
       votes: 18,
       soldOut: false,
       image: 'https://m.media-amazon.com/images/I/51gEqn2xwOL._AC_SL1500_.jpg'
     },
     {
-      name: 'Ketch Karbonate Measuring Board',
-      price: 'From $29.99',
+      name: 'Fishing Online Karbonate Fish Measuring Board',
+      price: 'From $44.99',
       rating: 4.9,
       votes: 63,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/61ZO7dymIPL.__AC_SY300_SX300_QL70_FMwebp_.jpg'
     },
     {
-      name: 'Power-Pole Battery Pack and Charger',
-      price: '$199.99',
+      name: 'Sougayilang Fishing Rod Reel Combo with Telescopic Fishing Pole Spinning Reel Carrier Bag for Travel Saltwater Freshwater Fishing',
+      price: 'From $69.99',
       rating: 4.9,
       votes: 14,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/81gE6dy-WRL._AC_SL1500_.jpg'
     },
     {
-      name: 'Power-Pole Micro Shallow Water Anchor',
-      price: '$599.99',
+      name: 'PLUSINNO Fishing Lures, 137Pcs Tackle Box with Tackle Included, Crankbaits, Spoon, Hooks, Weights & Other Accessories',
+      price: 'From $16.99',
       rating: 4.9,
       votes: 38,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/A1cBsRau-yL._AC_SL1500_.jpg'
     },
     {
-      name: 'Power-Pole Ultra-Lite / Heavy-Duty Spikes',
-      price: 'From $79.99',
+      name: 'PLUSINNO Large 4-Layer Tackle Box with Tackle Included, 547Pcs Fishing Lures Kit - Pliers, Crankbait, Hooks, Weights & Accessories',
+      price: 'From $54.99',
       rating: 4.8,
       votes: 58,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/81XzUaF006L._AC_SL1500_.jpg'
     }
   ];
 
