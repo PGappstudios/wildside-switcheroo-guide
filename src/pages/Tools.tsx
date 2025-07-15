@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import { Button } from '../components/ui/button';
@@ -27,49 +26,56 @@ const Tools = () => {
       price: 'From $99.99',
       rating: 4.9,
       votes: 87,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop'
     },
     {
       name: 'Fishing Online Custom Chinook PFD',
       price: '$89.95',
       rating: 5.0,
       votes: 12,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop'
     },
     {
       name: 'FishOn Tungsten Worm Weights',
       price: 'From $1.99',
       rating: 5.0,
       votes: 18,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop'
     },
     {
       name: 'Ketch Karbonate Measuring Board',
       price: 'From $29.99',
       rating: 4.9,
       votes: 63,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'
     },
     {
       name: 'Power-Pole Battery Pack and Charger',
       price: '$199.99',
       rating: 4.9,
       votes: 14,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop'
     },
     {
       name: 'Power-Pole Micro Shallow Water Anchor',
       price: '$599.99',
       rating: 4.9,
       votes: 38,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop'
     },
     {
       name: 'Power-Pole Ultra-Lite / Heavy-Duty Spikes',
       price: 'From $79.99',
       rating: 4.8,
       votes: 58,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop'
     }
   ];
 
@@ -79,70 +85,80 @@ const Tools = () => {
       price: '$149',
       rating: null,
       votes: 14826,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop'
     },
     {
       name: 'KUIU Performance Polo',
       price: '$89',
       rating: null,
       votes: 427,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=300&fit=crop'
     },
     {
       name: 'Tiburon Pant',
       price: '$149',
       rating: null,
       votes: 4000,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop'
     },
     {
       name: 'PRO Chest Pack',
       price: '$179',
       rating: null,
       votes: 452,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1622260614153-03223fb72052?w=400&h=300&fit=crop'
     },
     {
       name: 'Gila LS Hoodie',
       price: '$79',
       rating: null,
       votes: 1644,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=300&fit=crop'
     },
     {
       name: 'Tiburon 13″ Short',
       price: '$99',
       rating: null,
       votes: 2059,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop'
     },
     {
       name: 'KUIU Kutana Stretch Woven Pant',
       price: '$169',
       rating: null,
       votes: 3244,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop'
     },
     {
       name: 'Mesa Vented LS Snap Shirt',
       price: '$109',
       rating: null,
       votes: 533,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=300&fit=crop'
     },
     {
       name: 'KUIU HD Mud Boot',
       price: '$229',
       rating: null,
       votes: 525,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=400&h=300&fit=crop'
     },
     {
       name: 'PRO Brush Pant',
       price: '$199',
       rating: null,
       votes: 1108,
-      soldOut: false
+      soldOut: false,
+      image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop'
     }
   ];
 
@@ -230,7 +246,14 @@ const Tools = () => {
       <main className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product, index) => (
-            <Card key={index} className="hover:shadow-xl transition-shadow duration-300">
+            <Card key={index} className="hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img 
+                  src={product.image} 
+                  alt={product.name}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg leading-tight text-gray-800">
                   {product.name}
