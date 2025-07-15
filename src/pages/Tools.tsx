@@ -170,7 +170,8 @@ const Tools = () => {
 
   const handleViewOnAmazon = (productName: string) => {
     const searchQuery = encodeURIComponent(productName);
-    window.open(`https://www.amazon.com/s?k=${searchQuery}`, '_blank');
+    const amazonAssociateId = 'pgstudios0a-20';
+    window.open(`https://www.amazon.com/s?k=${searchQuery}&tag=${amazonAssociateId}`, '_blank');
   };
 
   const StarRating = ({ rating }: { rating: number }) => {
