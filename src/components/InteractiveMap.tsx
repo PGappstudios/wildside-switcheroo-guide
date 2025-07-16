@@ -111,9 +111,21 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ mapboxToken }) => {
           justify-content: center;
           color: white;
           font-size: 12px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+          box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+          transition: all 0.3s ease;
         `;
         markerElement.innerHTML = '🎯';
+
+        // Add hover animations to markers
+        markerElement.addEventListener('mouseenter', () => {
+          markerElement.style.transform = 'scale(1.2)';
+          markerElement.style.boxShadow = '0 8px 25px rgba(22, 163, 74, 0.4)';
+        });
+        
+        markerElement.addEventListener('mouseleave', () => {
+          markerElement.style.transform = 'scale(1)';
+          markerElement.style.boxShadow = '0 4px 15px rgba(22, 163, 74, 0.3)';
+        });
 
         const marker = new mapboxgl.Marker(markerElement)
           .setLngLat(area.coordinates as [number, number])
@@ -134,34 +146,34 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ mapboxToken }) => {
 
   if (showTokenInput && !mapboxToken) {
     return (
-      <div className="bg-white rounded-xl shadow-lg p-8">
+      <div className="bg-white rounded-xl shadow-strong p-8 hover-lift">
         <div className="text-center mb-6">
-          <MapPin className="h-16 w-16 mx-auto text-green-600 mb-4" />
-          <h3 className="text-2xl font-bold text-gray-800 mb-2">
+          <MapPin className="h-16 w-16 mx-auto text-green-600 mb-4 bounce-gentle" />
+          <h3 className="text-2xl font-bold text-gray-800 mb-2 fade-in-up">
             Interactive Hunting Map
           </h3>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 mb-6 fade-in-delay">
             To display the interactive map, please enter your Mapbox public token below.
           </p>
-          <p className="text-sm text-gray-500 mb-4">
+          <p className="text-sm text-gray-500 mb-4 fade-in-delay-2">
             Get your free token at{' '}
-            <a href="https://mapbox.com/" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:underline">
+            <a href="https://mapbox.com/" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:underline transition-colors duration-300">
               mapbox.com
             </a>
           </p>
         </div>
-        <div className="max-w-md mx-auto">
+        <div className="max-w-md mx-auto fade-in-delay-3">
           <input
             type="text"
             placeholder="Enter your Mapbox public token"
             value={tokenInput}
             onChange={(e) => setTokenInput(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg mb-4"
+            className="w-full p-3 border border-gray-300 rounded-lg mb-4 shadow-soft focus:shadow-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
           <Button 
             onClick={() => setShowTokenInput(false)}
             disabled={!tokenInput}
-            className="w-full bg-green-600 hover:bg-green-700"
+            className="w-full bg-green-600 hover:bg-green-700 shadow-medium hover:shadow-strong transition-all duration-300"
           >
             Load Map
           </Button>
@@ -171,84 +183,78 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ mapboxToken }) => {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-      <div className="p-6 border-b">
-        <h3 className="text-2xl font-bold text-gray-800 mb-4">Interactive Hunting Map</h3>
+    <div className="bg-white rounded-xl shadow-strong overflow-hidden hover-lift">
+      <div className="p-6 border-b bg-gradient-to-r from-green-50 to-blue-50">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4 slide-in-left">Interactive Hunting Map</h3>
         
         {/* Filters */}
         <div className="flex flex-wrap gap-4 mb-4">
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="bigGame"
-              checked={filters.bigGame}
-              onCheckedChange={(checked) => 
-                setFilters(prev => ({ ...prev, bigGame: !!checked }))
-              }
-            />
-            <label htmlFor="bigGame" className="text-sm font-medium">Big Game</label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="waterfowl"
-              checked={filters.waterfowl}
-              onCheckedChange={(checked) => 
-                setFilters(prev => ({ ...prev, waterfowl: !!checked }))
-              }
-            />
-            <label htmlFor="waterfowl" className="text-sm font-medium">Waterfowl</label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="mixedGame"
-              checked={filters.mixedGame}
-              onCheckedChange={(checked) => 
-                setFilters(prev => ({ ...prev, mixedGame: !!checked }))
-              }
-            />
-            <label htmlFor="mixedGame" className="text-sm font-medium">Mixed Game</label>
-          </div>
+          {[
+            { key: 'bigGame', label: 'Big Game' },
+            { key: 'waterfowl', label: 'Waterfowl' },
+            { key: 'mixedGame', label: 'Mixed Game' }
+          ].map((filter, index) => (
+            <div key={filter.key} className="flex items-center space-x-2 slide-in-right" style={{ animationDelay: `${index * 0.1}s` }}>
+              <Checkbox
+                id={filter.key}
+                checked={filters[filter.key as keyof typeof filters]}
+                onCheckedChange={(checked) => 
+                  setFilters(prev => ({ ...prev, [filter.key]: !!checked }))
+                }
+                className="transition-all duration-300 hover:scale-110"
+              />
+              <label htmlFor={filter.key} className="text-sm font-medium cursor-pointer hover:text-green-600 transition-colors duration-300">
+                {filter.label}
+              </label>
+            </div>
+          ))}
         </div>
       </div>
 
       <div className="flex">
         {/* Map Container */}
         <div className="flex-1">
-          <div ref={mapContainer} className="h-96 w-full" />
+          <div ref={mapContainer} className="h-96 w-full relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-green-100/20 to-blue-100/20 pointer-events-none"></div>
+          </div>
         </div>
 
         {/* Area Details Panel */}
         {selectedArea && (
-          <div className="w-80 border-l bg-gray-50 p-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Target className="h-5 w-5 text-green-600" />
+          <div className="w-80 border-l bg-gradient-to-b from-gray-50 to-white p-6 slide-in-right">
+            <Card className="shadow-medium hover:shadow-strong transition-all duration-300 border-0">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center gap-2 text-green-700">
+                  <Target className="h-5 w-5 text-green-600 bounce-gentle" />
                   {selectedArea.name}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div>
+                <div className="fade-in-up">
                   <h4 className="font-semibold text-gray-800 mb-2">Description</h4>
-                  <p className="text-gray-600 text-sm">{selectedArea.description}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">{selectedArea.description}</p>
                 </div>
                 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 fade-in-delay">
                   <Trees className="h-4 w-4 text-green-600" />
-                  <span className="text-sm font-medium">{selectedArea.type}</span>
+                  <span className="text-sm font-medium px-3 py-1 bg-green-100 text-green-800 rounded-full shadow-soft">
+                    {selectedArea.type}
+                  </span>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 fade-in-delay-2">
                   <Calendar className="h-4 w-4 text-green-600" />
-                  <span className="text-sm">{selectedArea.season}</span>
+                  <span className="text-sm font-medium">{selectedArea.season}</span>
                 </div>
 
-                <div>
+                <div className="fade-in-delay-3">
                   <h4 className="font-semibold text-gray-800 mb-2">Available Game</h4>
                   <div className="flex flex-wrap gap-1">
-                    {selectedArea.animals.map((animal) => (
+                    {selectedArea.animals.map((animal, index) => (
                       <span
                         key={animal}
-                        className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full"
+                        className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full shadow-soft hover:shadow-medium transition-all duration-300 hover-scale"
+                        style={{ animationDelay: `${index * 0.1}s` }}
                       >
                         {animal}
                       </span>
@@ -256,16 +262,16 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ mapboxToken }) => {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-2">
+                <div className="flex items-start gap-2 fade-in-delay">
                   <Shield className="h-4 w-4 text-green-600 mt-0.5" />
                   <div>
                     <h4 className="font-semibold text-gray-800 mb-1">Regulations</h4>
-                    <p className="text-sm text-gray-600">{selectedArea.regulations}</p>
+                    <p className="text-sm text-gray-600 leading-relaxed">{selectedArea.regulations}</p>
                   </div>
                 </div>
 
-                <div className="pt-2">
-                  <span className={`px-2 py-1 text-xs rounded-full ${
+                <div className="pt-2 fade-in-delay-2">
+                  <span className={`px-3 py-1 text-xs rounded-full shadow-soft transition-all duration-300 hover:shadow-medium ${
                     selectedArea.difficulty === 'Beginner' ? 'bg-green-100 text-green-800' :
                     selectedArea.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' :
                     'bg-red-100 text-red-800'
