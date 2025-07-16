@@ -86,7 +86,7 @@ const Tools = () => {
       rating: 4.5,
       votes: 1247,
       soldOut: false,
-      image: 'https://m.media-amazon.com/images/I/71rHpWn8AFL._AC_SL1500_.jpg'
+      image: 'https://m.media-amazon.com/images/I/713lp136cNL._AC_SX679_.jpg'
     },
     {
       name: 'Barnett Whitetail Hunter STR Crossbow',
@@ -94,7 +94,7 @@ const Tools = () => {
       rating: 4.3,
       votes: 892,
       soldOut: false,
-      image: 'https://m.media-amazon.com/images/I/71V3L+mzZlL._AC_SL1500_.jpg'
+      image: 'https://m.media-amazon.com/images/I/61jJ0qu6--L._AC_SL1500_.jpg'
     },
     {
       name: 'PSE Archery Stinger Max SS Compound Bow',
@@ -102,7 +102,7 @@ const Tools = () => {
       rating: 4.7,
       votes: 456,
       soldOut: false,
-      image: 'https://m.media-amazon.com/images/I/71CvJ8XZRRL._AC_SL1500_.jpg'
+      image: 'https://m.media-amazon.com/images/I/61Dua9KZhqL._AC_SY879_.jpg'
     },
     {
       name: 'CVLIFE 4-16x44 Hunting Rifle Scope',
@@ -110,7 +110,7 @@ const Tools = () => {
       rating: 4.4,
       votes: 2134,
       soldOut: false,
-      image: 'https://m.media-amazon.com/images/I/61wZ+h6ZKUL._AC_SL1500_.jpg'
+      image: 'https://m.media-amazon.com/images/I/6121FVF5DEL.__AC_SY300_SX300_QL70_FMwebp_.jpg'
     },
     {
       name: 'TenPoint Vapor RS470 Crossbow Package',
@@ -118,7 +118,7 @@ const Tools = () => {
       rating: 4.8,
       votes: 234,
       soldOut: false,
-      image: 'https://m.media-amazon.com/images/I/61O8k7W3BsL._AC_SL1500_.jpg'
+      image: 'https://m.media-amazon.com/images/I/71b3IwgkWZL.__AC_SX300_SY300_QL70_FMwebp_.jpg'
     },
     {
       name: 'Carbon Express Maxima RED Arrows',
@@ -126,15 +126,15 @@ const Tools = () => {
       rating: 4.6,
       votes: 567,
       soldOut: false,
-      image: 'https://m.media-amazon.com/images/I/71E8JlmTBbL._AC_SL1500_.jpg'
+      image: 'https://m.media-amazon.com/images/I/61sHKG0Ij0L._AC_SX679_.jpg'
     },
     {
-      name: 'Sitka Gear Core Heavyweight Hoodie',
+      name: 'KUIU Gila LS Hoodie UPF 50+ Cooling Shirt for Hunting & Outdoors Quick-Dry',
       price: 'From $129.99',
       rating: 4.7,
       votes: 823,
       soldOut: false,
-      image: 'https://m.media-amazon.com/images/I/71b5M4V8wkL._AC_UL1500_.jpg'
+      image: 'https://m.media-amazon.com/images/I/71gjyQBaBVL._AC_SX679_.jpg'
     },
     {
       name: 'Muddy Outdoors Infinity 360 Tree Stand',
@@ -142,7 +142,7 @@ const Tools = () => {
       rating: 4.5,
       votes: 445,
       soldOut: false,
-      image: 'https://m.media-amazon.com/images/I/71bKQp3YSJL._AC_SL1500_.jpg'
+      image: 'https://m.media-amazon.com/images/I/61AzVRQn7bL._AC_SX679_.jpg'
     },
     {
       name: 'Bushnell Trophy Cam HD Essential E3 Trail Camera',
@@ -150,7 +150,7 @@ const Tools = () => {
       rating: 4.3,
       votes: 1567,
       soldOut: false,
-      image: 'https://m.media-amazon.com/images/I/71FQhNElsnL._AC_SL1500_.jpg'
+      image: 'https://m.media-amazon.com/images/I/71U754rOZlL._AC_SX679_.jpg'
     },
     {
       name: 'Primos Hunting The Can Deer Call',
@@ -158,7 +158,7 @@ const Tools = () => {
       rating: 4.2,
       votes: 2345,
       soldOut: false,
-      image: 'https://m.media-amazon.com/images/I/61MZj8M3I+L._AC_SL1500_.jpg'
+      image: 'https://m.media-amazon.com/images/I/61unTjze7hL.__AC_SY300_SX300_QL70_FMwebp_.jpg'
     }
   ];
 
