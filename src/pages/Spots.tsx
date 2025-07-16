@@ -32,7 +32,7 @@ const Spots = () => {
           species: ['Barramundi', 'Coral Trout', 'Spanish Mackerel', 'Giant Trevally'],
           temperature: '24-28°C',
           difficulty: 'Intermediate',
-          image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80'
+          image: 'https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQTpy1S43rJwtLzBk46mT-W9jQvxxITUKjbYDl4x2Vvv87UKsDGeMA14P0BsnI_lRTmXZxLKilW6S5Ko3mgxeX55vbF-HnReCi5ZSzUlA'
         },
         {
           name: 'Norwegian Fjords',
