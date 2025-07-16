@@ -15,9 +15,9 @@ const Tools = () => {
         keywords: 'fishing gear, fishing equipment, fishing rods, fishing reels, fishing tackle, best fishing tools, fishing gear reviews'
       }
     : {
-        title: 'Best Hunting Gear & Equipment Reviews | Top-Rated Tools 2024',
-        description: 'Discover the best hunting gear and equipment. Expert reviews of top-rated apparel, weapons, and accessories from trusted brands on Amazon.',
-        keywords: 'hunting gear, hunting equipment, hunting apparel, hunting tools, best hunting gear, hunting gear reviews'
+        title: 'Best Hunting Weapons & Gear Reviews | Top-Rated Equipment 2024',
+        description: 'Discover the best hunting weapons and gear. Expert reviews of top-rated crossbows, rifles, archery equipment, and hunting accessories from trusted brands on Amazon.',
+        keywords: 'hunting weapons, hunting gear, crossbows, hunting rifles, archery equipment, hunting accessories, hunting gear reviews'
       };
 
   const fishingProducts = [
@@ -81,88 +81,87 @@ const Tools = () => {
 
   const huntingProducts = [
     {
-      name: 'Attack Pant',
-      price: '$149',
-      rating: null,
-      votes: 14826,
+      name: 'CenterPoint Sniper 370 Crossbow Package',
+      price: 'From $249.99',
+      rating: 4.5,
+      votes: 1247,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/71rHpWn8AFL._AC_SL1500_.jpg'
     },
     {
-      name: 'KUIU Performance Polo',
-      price: '$89',
-      rating: null,
-      votes: 427,
+      name: 'Barnett Whitetail Hunter STR Crossbow',
+      price: 'From $199.99',
+      rating: 4.3,
+      votes: 892,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/71V3L+mzZlL._AC_SL1500_.jpg'
     },
     {
-      name: 'Tiburon Pant',
-      price: '$149',
-      rating: null,
-      votes: 4000,
+      name: 'PSE Archery Stinger Max SS Compound Bow',
+      price: 'From $329.99',
+      rating: 4.7,
+      votes: 456,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/71CvJ8XZRRL._AC_SL1500_.jpg'
     },
     {
-      name: 'PRO Chest Pack',
-      price: '$179',
-      rating: null,
-      votes: 452,
+      name: 'CVLIFE 4-16x44 Hunting Rifle Scope',
+      price: 'From $59.99',
+      rating: 4.4,
+      votes: 2134,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1622260614153-03223fb72052?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/61wZ+h6ZKUL._AC_SL1500_.jpg'
     },
     {
-      name: 'Gila LS Hoodie',
-      price: '$79',
-      rating: null,
-      votes: 1644,
+      name: 'TenPoint Vapor RS470 Crossbow Package',
+      price: 'From $1,999.99',
+      rating: 4.8,
+      votes: 234,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/61O8k7W3BsL._AC_SL1500_.jpg'
     },
     {
-      name: 'Tiburon 13″ Short',
-      price: '$99',
-      rating: null,
-      votes: 2059,
+      name: 'Carbon Express Maxima RED Arrows',
+      price: 'From $89.99',
+      rating: 4.6,
+      votes: 567,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/71E8JlmTBbL._AC_SL1500_.jpg'
     },
     {
-      name: 'KUIU Kutana Stretch Woven Pant',
-      price: '$169',
-      rating: null,
-      votes: 3244,
+      name: 'Sitka Gear Core Heavyweight Hoodie',
+      price: 'From $129.99',
+      rating: 4.7,
+      votes: 823,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/71b5M4V8wkL._AC_UL1500_.jpg'
     },
     {
-      name: 'Mesa Vented LS Snap Shirt',
-      price: '$109',
-      rating: null,
-      votes: 533,
+      name: 'Muddy Outdoors Infinity 360 Tree Stand',
+      price: 'From $189.99',
+      rating: 4.5,
+      votes: 445,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/71bKQp3YSJL._AC_SL1500_.jpg'
     },
     {
-      name: 'KUIU HD Mud Boot',
-      price: '$229',
-      rating: null,
-      votes: 525,
+      name: 'Bushnell Trophy Cam HD Essential E3 Trail Camera',
+      price: 'From $89.99',
+      rating: 4.3,
+      votes: 1567,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/71FQhNElsnL._AC_SL1500_.jpg'
     },
     {
-      name: 'PRO Brush Pant',
-      price: '$199',
-      rating: null,
-      votes: 1108,
+      name: 'Primos Hunting The Can Deer Call',
+      price: 'From $14.99',
+      rating: 4.2,
+      votes: 2345,
       soldOut: false,
-      image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop'
+      image: 'https://m.media-amazon.com/images/I/61MZj8M3I+L._AC_SL1500_.jpg'
     }
   ];
 
-  // Filter out sold out products
   const availableFishingProducts = fishingProducts.filter(product => !product.soldOut);
   const availableHuntingProducts = huntingProducts.filter(product => !product.soldOut);
   const products = mode === 'fishing' ? availableFishingProducts : availableHuntingProducts;
@@ -232,12 +231,12 @@ const Tools = () => {
       <header className={`bg-gradient-to-r ${themeColors.gradient} text-white py-20`}>
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-4">
-            {mode === 'fishing' ? 'Best-Selling Fishing Products' : 'Best-Selling Hunting Products'}
+            {mode === 'fishing' ? 'Best-Selling Fishing Products' : 'Best Hunting Weapons & Gear'}
           </h1>
           <p className="text-xl">
             {mode === 'fishing' 
               ? 'Top-rated fishing gear from Amazon.com' 
-              : 'Premium hunting gear and apparel from Amazon.com'
+              : 'Premium hunting weapons and gear from Amazon.com'
             }
           </p>
         </div>
