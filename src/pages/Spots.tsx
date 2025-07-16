@@ -41,7 +41,7 @@ const Spots = () => {
           species: ['Atlantic Salmon', 'Arctic Cod', 'Halibut', 'Sea Trout'],
           temperature: '8-15°C',
           difficulty: 'Advanced',
-          image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80'
+          image: 'https://cdn.audleytravel.com/2799/1999/79/15993621-norwegian-fjords.jpg'
         },
         {
           name: 'Costa Rica Pacific Coast',
@@ -50,7 +50,7 @@ const Spots = () => {
           species: ['Blue Marlin', 'Sailfish', 'Yellowfin Tuna', 'Dorado'],
           temperature: '26-30°C',
           difficulty: 'Intermediate',
-          image: '#000000'
+          image: 'https://cdn1.matadornetwork.com/blogs/1/2021/03/Guanacaste-beach-in-Costa-Rica.jpg'
         },
         {
           name: 'Alaska Wilderness',
@@ -59,7 +59,7 @@ const Spots = () => {
           species: ['King Salmon', 'Sockeye Salmon', 'Rainbow Trout', 'Arctic Char'],
           temperature: '10-18°C',
           difficulty: 'Advanced',
-          image: 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?auto=format&fit=crop&w=800&q=80'
+          image: 'https://lh4.googleusercontent.com/proxy/B0esyR0hIRpH4NPe9hZLepgHWAPq0PDpDrYwRjQo294wl-Gj0awsFjvjQmorAVqcdJxMPxJ905YRJJnPDBanOA'
         },
         {
           name: 'Maldives Atolls',
@@ -68,7 +68,7 @@ const Spots = () => {
           species: ['Giant Trevally', 'Wahoo', 'Barracuda', 'Mahi-Mahi'],
           temperature: '27-30°C',
           difficulty: 'Beginner',
-          image: 'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=800&q=80'
+          image: 'https://maldives-magazine.com/pictures/oorr-aerial-2019.jpg'
         },
         {
           name: 'Amazon Basin, Brazil',
@@ -77,7 +77,7 @@ const Spots = () => {
           species: ['Peacock Bass', 'Piranha', 'Arapaima', 'Catfish'],
           temperature: '25-32°C',
           difficulty: 'Intermediate',
-          image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80'
+          image: 'https://images.nationalgeographic.org/image/upload/v1638890315/EducationHub/photos/amazon-river-basin.jpg'
         },
         {
           name: 'Florida Keys, USA',
@@ -86,7 +86,7 @@ const Spots = () => {
           species: ['Tarpon', 'Bonefish', 'Permit', 'Snook'],
           temperature: '22-28°C',
           difficulty: 'Advanced',
-          image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80'
+          image: 'https://www.intrepidtravel.com/adventures/wp-content/uploads/2022/02/USA-Florida-Key-West-travellers-snorkelling-690679549-ss-800x450-1.jpg'
         },
         {
           name: 'New Zealand South Island',
@@ -95,7 +95,7 @@ const Spots = () => {
           species: ['Brown Trout', 'Rainbow Trout', 'Salmon', 'Quinnat Salmon'],
           temperature: '12-22°C',
           difficulty: 'Intermediate',
-          image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80'
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoc1acvk7LSdeNus-Vp5rtoSLJO0iyD09n8g&s'
         },
         {
           name: 'Seychelles Islands',
@@ -104,7 +104,7 @@ const Spots = () => {
           species: ['Sailfish', 'Marlin', 'Tuna', 'Bonito'],
           temperature: '26-30°C',
           difficulty: 'Intermediate',
-          image: 'https://images.unsplash.com/photo-1544552866-d3ed42536cfd?auto=format&fit=crop&w=800&q=80'
+          image: 'https://cdn.mahlatini.com/Clear-kayak-tour-Image-courtesy-of-Michel-Denousse-Tourism-Seychelles.jpg'
         }
       ]
     : [
@@ -115,7 +115,7 @@ const Spots = () => {
           species: ['Elk', 'Bison', 'Mule Deer', 'Pronghorn'],
           temperature: '5-15°C',
           difficulty: 'Advanced',
-          image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=800&q=80'
+          image: 'https://www.visittheusa.com/sites/default/files/styles/hero_l/public/images/hero_media_image/2016-10/Yellowstone.jpg?h=2a29b199&itok=SoB8AKTf'
         },
         {
           name: 'Scottish Highlands',
@@ -124,7 +124,7 @@ const Spots = () => {
           species: ['Red Deer', 'Roe Deer', 'Grouse', 'Ptarmigan'],
           temperature: '2-12°C',
           difficulty: 'Intermediate',
-          image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=800&q=80'
+          image: 'https://www.untours.com/wp-content/uploads/2025/04/shutterstock_2440982415-768x512.jpg'
         },
         {
           name: 'Alberta, Canada',
@@ -133,7 +133,7 @@ const Spots = () => {
           species: ['Moose', 'Black Bear', 'Whitetail Deer', 'Caribou'],
           temperature: '0-18°C',
           difficulty: 'Advanced',
-          image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnnoQpEbk_6pSOkhb1Y4TVZQUmYghgoSZ7DA&s'
         },
         {
           name: 'Patagonia, Argentina',
@@ -142,7 +142,7 @@ const Spots = () => {
           species: ['Red Deer', 'Wild Boar', 'Water Buffalo', 'Axis Deer'],
           temperature: '8-20°C',
           difficulty: 'Intermediate',
-          image: 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?auto=format&fit=crop&w=800&q=80'
+          image: 'https://pohcdn.com/sites/default/files/styles/paragraph__live_banner__lb_image__1880bp/public/live_banner/Argentin-Patagonia.jpg'
         },
         {
           name: 'Namibian Kalahari',
@@ -151,7 +151,7 @@ const Spots = () => {
           species: ['Gemsbok', 'Springbok', 'Kudu', 'Warthog'],
           temperature: '15-35°C',
           difficulty: 'Advanced',
-          image: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?auto=format&fit=crop&w=800&q=80'
+          image: 'https://www.namibiatravel.com/wp-content/uploads/2012/04/oryx-in-the-kalahari-desert.jpg'
         },
         {
           name: 'Russian Siberia',
@@ -160,7 +160,7 @@ const Spots = () => {
           species: ['Brown Bear', 'Wild Boar', 'Red Deer', 'Roe Deer'],
           temperature: '-5-15°C',
           difficulty: 'Expert',
-          image: '#000000'
+          image: 'https://www.remotelands.com/remotenew1/dist/images/whentogo_country_season/b171109051.jpg'
         },
         {
           name: 'Texas Hill Country, USA',
@@ -169,7 +169,7 @@ const Spots = () => {
           species: ['Whitetail Deer', 'Axis Deer', 'Wild Turkey', 'Nilgai'],
           temperature: '10-25°C',
           difficulty: 'Beginner',
-          image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=800&q=80'
+          image: 'https://hips.hearstapps.com/hmg-prod/images/texas-hill-country-hamilton-pool-preserve-1582062538.jpg?crop=0.8445xw:1xh;center,top&resize=980:*'
         },
         {
           name: 'New Zealand High Country',
@@ -178,7 +178,7 @@ const Spots = () => {
           species: ['Red Deer', 'Tahr', 'Chamois', 'Wild Goat'],
           temperature: '5-18°C',
           difficulty: 'Advanced',
-          image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+          image: 'https://no8tours.co.nz/assets/images/slides/1509335952-77_canthighcountry15.jpg'
         },
         {
           name: 'Mongolian Steppes',
@@ -187,7 +187,7 @@ const Spots = () => {
           species: ['Marco Polo Sheep', 'Ibex', 'Argali Sheep', 'Wolf'],
           temperature: '-10-20°C',
           difficulty: 'Expert',
-          image: '#000000'
+          image: 'https://static.scientificamerican.com/sciam/cache/file/493C58FF-6DB7-431C-8D985E1FACC93D10_source.jpg'
         }
       ];
 
