@@ -27,7 +27,7 @@ const Species = () => {
           locations: ['Norway', 'Scotland', 'Canada', 'Alaska'],
           bestTime: 'May to September',
           description: 'Prized for their fighting ability and excellent taste',
-          image: 'https://images.unsplash.com/photo-1544943910-4c1dc44aab44?auto=format&fit=crop&w=400&q=80'
+          image: 'https://www.onekindplanet.org/wp-content/uploads/2018/04/large-512x300.jpg'
         },
         {
           name: 'Largemouth Bass',
@@ -35,7 +35,7 @@ const Species = () => {
           locations: ['USA', 'Canada', 'Mexico', 'Japan'],
           bestTime: 'April to October',
           description: 'Popular game fish known for aggressive strikes',
-          image: 'https://images.unsplash.com/photo-1571769264071-95e8dfe5ca04?auto=format&fit=crop&w=400&q=80'
+          image: 'https://www.eekwi.org/sites/default/files/styles/original/public/2021-08/largemouth-bass-virgil-beck.jpg?itok=-SgS3FNJ'
         },
         {
           name: 'Bluefin Tuna',
@@ -43,7 +43,7 @@ const Species = () => {
           locations: ['Mediterranean', 'Atlantic Ocean', 'Pacific Ocean'],
           bestTime: 'June to November',
           description: 'Massive pelagic fish highly valued for sashimi',
-          image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=400&q=80'
+          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Bluefin-big.jpg/1200px-Bluefin-big.jpg'
         },
         {
           name: 'Rainbow Trout',
@@ -51,7 +51,7 @@ const Species = () => {
           locations: ['North America', 'Europe', 'Asia', 'Australia'],
           bestTime: 'March to November',
           description: 'Beautiful freshwater fish with distinctive pink stripe',
-          image: 'https://images.unsplash.com/photo-1571769264071-95e8dfe5ca04?auto=format&fit=crop&w=400&q=80'
+          image: 'https://static.wikia.nocookie.net/undawater/images/b/b9/Rainbow_Trout.jpg/revision/latest/scale-to-width-down/693?cb=20240708222941'
         },
         {
           name: 'Northern Pike',
@@ -59,7 +59,7 @@ const Species = () => {
           locations: ['North America', 'Europe', 'Asia'],
           bestTime: 'May to October',
           description: 'Aggressive predator with razor-sharp teeth',
-          image: 'https://images.unsplash.com/photo-1571769264071-95e8dfe5ca04?auto=format&fit=crop&w=400&q=80'
+          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Esox_lucius_ZOO_1.jpg/960px-Esox_lucius_ZOO_1.jpg'
         },
         {
           name: 'Mahi-Mahi',
@@ -67,7 +67,7 @@ const Species = () => {
           locations: ['Tropical Atlantic', 'Pacific Ocean', 'Indian Ocean'],
           bestTime: 'Year-round in tropics',
           description: 'Colorful dolphinfish with excellent table fare',
-          image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=400&q=80'
+          image: 'https://chefsmandala.com/wp-content/uploads/2018/04/Mahi-Mahi-Dolphin-Fish.jpg'
         },
         {
           name: 'Striped Bass',
@@ -75,7 +75,7 @@ const Species = () => {
           locations: ['Atlantic Coast USA', 'Pacific Coast USA', 'Great Lakes'],
           bestTime: 'April to November',
           description: 'Popular sport fish with distinctive horizontal stripes',
-          image: 'https://images.unsplash.com/photo-1520637836862-4d197d17c0a4?auto=format&fit=crop&w=400&q=80'
+          image: 'https://upload.wikimedia.org/wikipedia/commons/9/9f/Striped_bass_FWS_1.jpg'
         },
         {
           name: 'Walleye',
@@ -83,7 +83,7 @@ const Species = () => {
           locations: ['Northern USA', 'Canada', 'Great Lakes'],
           bestTime: 'April to October',
           description: 'Excellent eating fish with distinctive glassy eyes',
-          image: 'https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=400&q=80'
+          image: 'https://norrik.com/wp-content/uploads/2023/09/walleye-lake-fishing.jpg'
         },
         {
           name: 'Red Snapper',
@@ -91,7 +91,7 @@ const Species = () => {
           locations: ['Gulf of Mexico', 'Atlantic Ocean', 'Caribbean'],
           bestTime: 'May to September',
           description: 'Prized deep-water fish with distinctive red coloration',
-          image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=400&q=80'
+          image: 'https://www.crfishingcharters.com/wp-content/uploads/2022/05/costa-rica-fishing-charters-red-snapper-sportfishing-pargo-rojo.jpg'
         }
       ]
     : [
@@ -101,7 +101,7 @@ const Species = () => {
           locations: ['North America', 'Central America', 'South America'],
           bestTime: 'September to January',
           description: 'Most popular big game animal in North America',
-          image: 'https://images.unsplash.com/photo-1439886183900-e79ec0057170?auto=format&fit=crop&w=400&q=80'
+          image: 'https://www.beardsleyzoo.org/uploads/1/2/4/2/124214186/published/213.jpg?1703867179'
         },
         {
           name: 'American Elk',
@@ -109,7 +109,7 @@ const Species = () => {
           locations: ['Western USA', 'Canada', 'Rocky Mountains'],
           bestTime: 'September to November',
           description: 'Majestic big game animal known for bugling calls',
-          image: 'https://images.unsplash.com/photo-1493962853295-0fd70327578a?auto=format&fit=crop&w=400&q=80'
+          image: 'https://cdn.britannica.com/03/94603-050-D74D3709/elk-American-Yellowstone-National-Park-Wyoming.jpg'
         },
         {
           name: 'Wild Boar',
@@ -117,7 +117,7 @@ const Species = () => {
           locations: ['Europe', 'Asia', 'North America', 'Australia'],
           bestTime: 'Year-round',
           description: 'Challenging and dangerous game requiring skill',
-          image: 'https://images.unsplash.com/photo-1485833077593-4278bba3f11f?auto=format&fit=crop&w=400&q=80'
+          image: 'https://www.bushgear.co.uk/cdn/shop/articles/Wild_Boar_European.jpg?v=1539682585&width=2048'
         },
         {
           name: 'Moose',
@@ -125,7 +125,7 @@ const Species = () => {
           locations: ['Alaska', 'Canada', 'Northern USA', 'Scandinavia'],
           bestTime: 'September to October',
           description: 'Largest member of the deer family, impressive antlers',
-          image: 'https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?auto=format&fit=crop&w=400&q=80'
+          image: 'https://images.takeshape.io/86ce9525-f5f2-4e97-81ba-54e8ce933da7/dev/881f5500-77b1-468a-832e-a6f8467cedf3/Wild%20Moose%20Grazing%20shutterstock_790996543%20(1).jpg?auto=compress%2Cformat&w=1440'
         },
         {
           name: 'Black Bear',
@@ -133,7 +133,7 @@ const Species = () => {
           locations: ['North America', 'Canada', 'Alaska'],
           bestTime: 'Spring and Fall',
           description: 'Adaptable omnivore found in various habitats',
-          image: 'https://images.unsplash.com/photo-1452960962994-acf4fd70b632?auto=format&fit=crop&w=400&q=80'
+          image: 'https://bear.org/wp-content/uploads/2023/03/20130607_Bow-copy.jpg'
         },
         {
           name: 'Mule Deer',
@@ -141,7 +141,7 @@ const Species = () => {
           locations: ['Western North America', 'Mexico'],
           bestTime: 'October to December',
           description: 'Distinguished by large ears and black-tipped tail',
-          image: 'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?auto=format&fit=crop&w=400&q=80'
+          image: 'https://www.nps.gov/romo/learn/nature/images/MuleDeer_Cover_688x400.jpg'
         },
         {
           name: 'Pronghorn Antelope',
@@ -149,7 +149,7 @@ const Species = () => {
           locations: ['Western USA', 'Mexico', 'Southern Canada'],
           bestTime: 'August to October',
           description: 'Fastest land animal in North America',
-          image: 'https://images.unsplash.com/photo-1517022812141-23620dba5c23?auto=format&fit=crop&w=400&q=80'
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpnfhAEOy7vOUtfwI_grkdxKEN6DKE97fAEQ&s'
         },
         {
           name: 'Mountain Goat',
@@ -157,7 +157,7 @@ const Species = () => {
           locations: ['Rocky Mountains', 'Alaska', 'Western Canada'],
           bestTime: 'August to November',
           description: 'Sure-footed climber of steep mountain terrain',
-          image: 'https://images.unsplash.com/photo-1498936178812-4b2e558d2937?auto=format&fit=crop&w=400&q=80'
+          image: 'https://www.nationalforests.org/assets/header-images/_600x300_crop_center-center_none/Mountain_Goat_Mount_Massive.JPG'
         },
         {
           name: 'Bighorn Sheep',
@@ -165,7 +165,7 @@ const Species = () => {
           locations: ['Western North America', 'Rocky Mountains'],
           bestTime: 'September to December',
           description: 'Known for their impressive curved horns',
-          image: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?auto=format&fit=crop&w=400&q=80'
+          image: 'https://rangerrick.org/wp-content/uploads/2018/01/Bighorn-RR-March-2018-donald-m-jones.jpg'
         }
       ];
 
