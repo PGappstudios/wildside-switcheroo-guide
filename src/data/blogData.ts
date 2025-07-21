@@ -436,7 +436,7 @@ export const getBlogPosts = async (): Promise<BlogPost[]> => {
             publishDate: frontMatter.publishDate || new Date().toISOString().split('T')[0],
             readTime,
             tags: frontMatter.tags || [],
-            image: frontMatter.image || '',
+            image: '', // Force all images to be empty - no images displayed
             category: frontMatter.category || 'fishing',
             featured: frontMatter.featured || false,
             slug: frontMatter.slug || id,
