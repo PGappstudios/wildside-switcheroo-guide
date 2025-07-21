@@ -181,7 +181,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Bottom Ad Banner */}
       <div className="py-8 bg-white">
