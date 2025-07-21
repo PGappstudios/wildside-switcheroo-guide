@@ -16,6 +16,7 @@ const Header = () => {
         { name: 'Seasons', path: '/seasons' },
         { name: 'Fish Species', path: '/species' },
         { name: 'Maps', path: '/maps' },
+        { name: 'Blog', path: '/blog' },
         { name: 'Regulations', path: '/regulations' }
       ]
     : [
@@ -24,6 +25,7 @@ const Header = () => {
         { name: 'Seasons', path: '/seasons' },
         { name: 'Animals', path: '/animals' },
         { name: 'Maps', path: '/maps' },
+        { name: 'Blog', path: '/blog' },
         { name: 'Regulations', path: '/regulations' }
       ];
 
