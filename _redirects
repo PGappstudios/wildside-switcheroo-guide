@@ -1,0 +1,24 @@
+# Netlify redirects for SPA (Single Page Application)
+# This ensures all routes are handled by React Router
+
+# Handle all routes by serving index.html
+/*    /index.html   200
+
+# Optional: Handle API routes if you have any
+/api/*  /api/:splat  200
+
+# Handle blog routes specifically (redundant but explicit)
+/blog/*  /index.html  200
+
+# Handle other main routes
+/spots  /index.html  200
+/areas  /index.html  200
+/tools  /index.html  200
+/weapons  /index.html  200
+/seasons  /index.html  200
+/species  /index.html  200
+/animals  /index.html  200
+/maps  /index.html  200
+/regulations  /index.html  200
+/terms  /index.html  200
+/privacy  /index.html  200
