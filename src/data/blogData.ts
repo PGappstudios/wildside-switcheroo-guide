@@ -15,23 +15,22 @@ export interface BlogPost {
   metaKeywords?: string;
 }
 
-export interface BlogApiConfig {
-  endpoint: string;
-  method: string;
-  headers: Record<string, string>;
+export interface BlogFrontMatter {
+  title: string;
+  excerpt: string;
+  author: string;
+  publishDate: string;
+  readTime?: number;
+  tags: string[];
+  image?: string;
+  category: 'fishing' | 'hunting';
+  featured?: boolean;
+  slug?: string;
+  metaDescription?: string;
+  metaKeywords?: string;
 }
 
-// Configuration for Make.com webhook integration
-export const blogApiConfig: BlogApiConfig = {
-  endpoint: '/api/blog', // This will be your Make.com webhook endpoint
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer YOUR_API_KEY' // Replace with your actual API key
-  }
-};
-
-// Sample blog posts structure for Make.com to follow
+// Sample blog posts for fallback
 export const sampleBlogPosts: BlogPost[] = [
   {
     id: '1',
@@ -147,134 +146,234 @@ export const sampleBlogPosts: BlogPost[] = [
   }
 ];
 
-// Make.com webhook payload structure
-export interface MakeComBlogPayload {
-  action: 'create' | 'update' | 'delete';
-  post: BlogPost;
-  timestamp: string;
-  source: 'make.com';
+// GitHub API configuration
+const GITHUB_OWNER = 'PGappstudios';
+const GITHUB_REPO = 'wildside-switcheroo-guide';
+const GITHUB_API_BASE = 'https://api.github.com';
+
+// Helper function to parse markdown frontmatter
+function parseFrontMatter(content: string): { frontMatter: BlogFrontMatter; content: string } {
+  const frontMatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
+  const match = content.match(frontMatterRegex);
+  
+  if (!match) {
+    throw new Error('Invalid markdown format - missing frontmatter');
+  }
+
+  const [, frontMatterText, markdownContent] = match;
+  const frontMatter: any = {};
+  
+  // Parse YAML-like frontmatter
+  frontMatterText.split('\n').forEach(line => {
+    const [key, ...valueParts] = line.split(':');
+    if (key && valueParts.length > 0) {
+      const value = valueParts.join(':').trim();
+      
+      // Handle arrays (tags)
+      if (value.startsWith('[') && value.endsWith(']')) {
+        frontMatter[key.trim()] = value.slice(1, -1).split(',').map(s => s.trim().replace(/"/g, ''));
+      }
+      // Handle booleans
+      else if (value === 'true' || value === 'false') {
+        frontMatter[key.trim()] = value === 'true';
+      }
+      // Handle numbers
+      else if (!isNaN(Number(value))) {
+        frontMatter[key.trim()] = Number(value);
+      }
+      // Handle strings
+      else {
+        frontMatter[key.trim()] = value.replace(/"/g, '');
+      }
+    }
+  });
+
+  return { frontMatter, content: markdownContent };
 }
 
-// Function to validate blog post data from Make.com
-export const validateBlogPost = (post: any): BlogPost | null => {
-  try {
-    // Required fields validation
-    if (!post.id || !post.title || !post.content || !post.category) {
-      console.error('Missing required blog post fields');
-      return null;
-    }
+// Helper function to convert markdown to HTML (basic conversion)
+function markdownToHtml(markdown: string): string {
+  return markdown
+    // Headers
+    .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+    .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+    .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+    // Bold and italic
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    // Lists
+    .replace(/^\* (.*$)/gm, '<li>$1</li>')
+    .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+    // Paragraphs
+    .replace(/^(?!<[h|u|l])(.*$)/gm, '<p>$1</p>')
+    // Clean up empty paragraphs
+    .replace(/<p><\/p>/g, '')
+    .replace(/<p>(\s*)<\/p>/g, '');
+}
 
-    // Category validation
-    if (!['fishing', 'hunting'].includes(post.category)) {
-      console.error('Invalid category. Must be "fishing" or "hunting"');
-      return null;
-    }
-
-    // Generate slug if not provided
-    const slug = post.slug || post.title.toLowerCase()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .trim();
-
-    return {
-      id: post.id,
-      title: post.title,
-      slug: slug,
-      excerpt: post.excerpt || post.content.substring(0, 200) + '...',
-      content: post.content,
-      author: post.author || 'Wildside Team',
-      publishDate: post.publishDate || new Date().toISOString().split('T')[0],
-      readTime: post.readTime || Math.ceil(post.content.split(' ').length / 200),
-      tags: Array.isArray(post.tags) ? post.tags : [],
-      image: post.image || 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80',
-      category: post.category,
-      featured: Boolean(post.featured),
-      metaDescription: post.metaDescription || post.excerpt,
-      metaKeywords: post.metaKeywords || post.tags?.join(', ') || ''
-    };
-  } catch (error) {
-    console.error('Error validating blog post:', error);
-    return null;
-  }
-};
-
-// API base URL configuration
-const API_BASE_URL = typeof window !== 'undefined' 
-  ? window.location.origin 
-  : 'http://localhost:3000';
-
-// API functions for blog posts
+// Function to fetch blog posts from GitHub
 export const getBlogPosts = async (): Promise<BlogPost[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/blog-webhook`);
+    // Fetch the content/posts directory from GitHub
+    const response = await fetch(`${GITHUB_API_BASE}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/content/posts`);
+    
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`GitHub API error: ${response.status}`);
     }
-    const data = await response.json();
-    if (data.success && Array.isArray(data.posts)) {
-      return data.posts;
+
+    const files = await response.json();
+    const blogPosts: BlogPost[] = [];
+
+    // Process each markdown file
+    for (const file of files) {
+      if (file.name.endsWith('.md')) {
+        try {
+          // Fetch the file content
+          const fileResponse = await fetch(file.download_url);
+          const fileContent = await fileResponse.text();
+          
+          // Parse frontmatter and content
+          const { frontMatter, content } = parseFrontMatter(fileContent);
+          
+          // Generate ID from filename
+          const id = file.name.replace('.md', '').replace(/^\d{4}-\d{2}-\d{2}-/, '');
+          
+          // Convert markdown to HTML
+          const htmlContent = markdownToHtml(content);
+          
+          // Calculate read time if not provided
+          const readTime = frontMatter.readTime || Math.ceil(content.split(' ').length / 200);
+          
+          const blogPost: BlogPost = {
+            id,
+            title: frontMatter.title,
+            excerpt: frontMatter.excerpt,
+            content: htmlContent,
+            author: frontMatter.author,
+            publishDate: frontMatter.publishDate,
+            readTime,
+            tags: frontMatter.tags || [],
+            image: frontMatter.image || 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80',
+            category: frontMatter.category,
+            featured: frontMatter.featured || false,
+            slug: frontMatter.slug || id,
+            metaDescription: frontMatter.metaDescription || frontMatter.excerpt,
+            metaKeywords: frontMatter.metaKeywords || frontMatter.tags?.join(', ') || ''
+          };
+          
+          blogPosts.push(blogPost);
+        } catch (error) {
+          console.error(`Error processing blog post ${file.name}:`, error);
+        }
+      }
     }
-    throw new Error('Invalid response format');
+
+    // Sort by publish date (newest first)
+    return blogPosts.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
+    
   } catch (error) {
-    console.error('Error loading blog posts from API:', error);
+    console.error('Error loading blog posts from GitHub:', error);
     // Fallback to sample data
     return sampleBlogPosts;
   }
 };
 
+// Function to fetch a single blog post from GitHub
 export const getBlogPost = async (id: string): Promise<BlogPost | null> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/blog/${id}`);
-    if (!response.ok) {
-      if (response.status === 404) {
-        return null;
-      }
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    if (data.success && data.post) {
-      return data.post;
-    }
-    throw new Error('Invalid response format');
+    const allPosts = await getBlogPosts();
+    return allPosts.find(post => post.id === id || post.slug === id) || null;
   } catch (error) {
-    console.error('Error loading blog post from API:', error);
+    console.error('Error loading blog post from GitHub:', error);
     // Fallback to sample data
     const fallbackPost = sampleBlogPosts.find(p => p.id === id);
     return fallbackPost || null;
   }
 };
 
-// Make.com integration instructions
-export const MAKE_COM_INTEGRATION_GUIDE = {
-  webhookEndpoint: 'https://your-domain.com/api/blog-webhook',
-  requiredFields: {
-    id: 'Unique identifier for the post',
-    title: 'Post title',
-    content: 'HTML content of the post',
-    category: 'Either "fishing" or "hunting"',
-    author: 'Author name (optional, defaults to "Wildside Team")',
-    publishDate: 'Date in YYYY-MM-DD format (optional, defaults to today)',
-    tags: 'Array of tags (optional)',
-    image: 'Featured image URL (optional, uses default if not provided)',
-    featured: 'Boolean for featured status (optional)',
-    excerpt: 'Short description (optional, auto-generated from content)',
-    metaDescription: 'SEO meta description (optional)',
-    metaKeywords: 'SEO keywords (optional)'
-  },
-  samplePayload: {
-    action: 'create',
-    post: {
-      id: 'unique-post-id',
-      title: 'Amazing Fishing Technique',
-      content: '<h2>Introduction</h2><p>This is the post content...</p>',
-      category: 'fishing',
-      author: 'John Doe',
-      tags: ['fishing', 'techniques', 'bass'],
-      image: 'https://example.com/image.jpg',
-      featured: false
+// Make.com integration guide for GitHub-based blog system
+export const MAKE_COM_GITHUB_INTEGRATION_GUIDE = {
+  workflow: [
+    {
+      step: 1,
+      module: "Timer",
+      description: "Schedule daily blog post creation",
+      settings: "Set to run daily at your preferred time"
     },
-    timestamp: new Date().toISOString(),
-    source: 'make.com'
-  }
+    {
+      step: 2,
+      module: "OpenAI > Create a Chat Completion",
+      description: "Generate blog post content",
+      settings: {
+        model: "gpt-4",
+        messages: [
+          {
+            role: "system",
+            content: "You are an expert outdoor content writer. Create engaging blog posts about fishing or hunting."
+          },
+          {
+            role: "user", 
+            content: "Write a comprehensive blog post about [TOPIC]. Include practical tips, techniques, and expert advice. Format as markdown with proper headers."
+          }
+        ]
+      }
+    },
+    {
+      step: 3,
+      module: "GitHub > Create or Update a File",
+      description: "Push blog post to GitHub repository",
+      settings: {
+        repository: "PGappstudios/wildside-switcheroo-guide",
+        filePath: "content/posts/{{formatDate(now; 'YYYY-MM-DD')}}-{{replace(2.choices[0].message.content.title; ' '; '-')}}.md",
+        content: "Generated markdown content with frontmatter",
+        commitMessage: "Add new blog post: {{2.choices[0].message.content.title}}",
+        branch: "main"
+      }
+    }
+  ],
+  markdownTemplate: `---
+title: "Your Blog Post Title"
+excerpt: "Short description of the blog post"
+author: "Author Name"
+publishDate: "2024-01-15"
+readTime: 8
+tags: ["Tag1", "Tag2", "Tag3"]
+image: "https://images.unsplash.com/photo-example"
+category: "fishing"
+featured: false
+slug: "your-blog-post-slug"
+metaDescription: "SEO meta description"
+metaKeywords: "keyword1, keyword2, keyword3"
+---
+
+# Your Blog Post Title
+
+## Introduction
+
+Your introduction paragraph here...
+
+## Main Content
+
+### Subsection 1
+
+Content for subsection 1...
+
+### Subsection 2
+
+Content for subsection 2...
+
+## Conclusion
+
+Your conclusion here...`,
+  
+  fileNaming: "content/posts/YYYY-MM-DD-blog-post-title.md",
+  
+  automationTips: [
+    "Use the Timer module to schedule daily posts",
+    "Alternate between fishing and hunting topics",
+    "Include relevant tags for better organization", 
+    "Use high-quality Unsplash images",
+    "Set featured: true for important posts",
+    "Vercel will auto-deploy when files are pushed to GitHub"
+  ]
 };
