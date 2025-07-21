@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
+import { ExternalLink } from 'lucide-react';
 import SEO from '../components/SEO';
 
 const Regulations = () => {
@@ -36,34 +37,60 @@ const Regulations = () => {
         {
           region: 'United States',
           requirements: ['Valid fishing license', 'Compliance with bag limits', 'Adherence to seasonal closures'],
-          details: 'Licenses vary by state. Some species require special permits.'
+          details: 'Licenses vary by state. Some species require special permits.',
+          links: [
+            { name: 'National Marine Fisheries Service', url: 'https://www.fisheries.noaa.gov/rules-and-regulations' },
+            { name: 'State Fishing Licenses', url: 'https://www.takemefishing.org/fishing/fishing-licenses/' },
+            { name: 'Federal Fishing Regulations', url: 'https://www.law.cornell.edu/cfr/text/50/part-622' }
+          ]
         },
         {
           region: 'Canada',
           requirements: ['Provincial fishing license', 'Species-specific regulations', 'Conservation requirements'],
-          details: 'Each province has different rules. Non-residents need special licenses.'
+          details: 'Each province has different rules. Non-residents need special licenses.',
+          links: [
+            { name: 'Fisheries and Oceans Canada', url: 'https://www.dfo-mpo.gc.ca/fisheries-peches/recreational-recreative/index-eng.html' },
+            { name: 'Provincial Fishing Regulations', url: 'https://www.canada.ca/en/environment-climate-change/services/canadian-environmental-protection-act-registry/substances-list/toxic/fishing-regulations.html' }
+          ]
         },
         {
           region: 'European Union',
           requirements: ['National fishing permits', 'Quota compliance', 'Protected species awareness'],
-          details: 'Regulations vary by country. Some areas have strict conservation measures.'
+          details: 'Regulations vary by country. Some areas have strict conservation measures.',
+          links: [
+            { name: 'European Commission Fisheries', url: 'https://ec.europa.eu/fisheries/cfp_en' },
+            { name: 'EU Fishing Regulations', url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32013R1380' }
+          ]
         }
       ]
     : [
         {
           region: 'United States',
           requirements: ['Hunter education certificate', 'Valid hunting license', 'Appropriate tags/stamps'],
-          details: 'Hunter safety course required. Some states have reciprocity agreements.'
+          details: 'Hunter safety course required. Some states have reciprocity agreements.',
+          links: [
+            { name: 'U.S. Fish & Wildlife Service', url: 'https://www.fws.gov/hunting' },
+            { name: 'Hunter Education Courses', url: 'https://www.hunter-ed.com/' },
+            { name: 'State Hunting Regulations', url: 'https://www.eregulations.com/hunting' }
+          ]
         },
         {
           region: 'Canada',
           requirements: ['Hunter education course', 'Provincial hunting license', 'Wildlife management stamps'],
-          details: 'Courses required for first-time hunters. Non-residents need guide in some areas.'
+          details: 'Courses required for first-time hunters. Non-residents need guide in some areas.',
+          links: [
+            { name: 'Canadian Wildlife Service', url: 'https://www.canada.ca/en/environment-climate-change/services/wildlife-habitat-private-land/habitat-stewardship-program.html' },
+            { name: 'Provincial Hunting Regulations', url: 'https://www.canada.ca/en/environment-climate-change/services/migratory-birds/hunting-regulations-summary.html' }
+          ]
         },
         {
           region: 'European Union',
           requirements: ['National hunting license', 'Weapon registration', 'Insurance requirements'],
-          details: 'Strict weapon laws. Hunting tests required in most countries.'
+          details: 'Strict weapon laws. Hunting tests required in most countries.',
+          links: [
+            { name: 'European Hunting Laws', url: 'https://www.face.eu/hunting-in-europe/' },
+            { name: 'EU Wildlife Regulations', url: 'https://ec.europa.eu/environment/nature/legislation/index_en.htm' }
+          ]
         }
       ];
 
@@ -123,9 +150,27 @@ const Regulations = () => {
                 </div>
               </div>
               
-              <div className="border-t pt-4">
+              <div className="border-t pt-4 mb-6">
                 <h3 className="text-lg font-semibold text-gray-700 mb-2">Additional Details:</h3>
                 <p className="text-gray-600">{reg.details}</p>
+              </div>
+
+              <div className="border-t pt-4">
+                <h3 className="text-lg font-semibold text-gray-700 mb-3">Official Resources:</h3>
+                <div className="flex flex-wrap gap-3">
+                  {reg.links.map((link, linkIndex) => (
+                    <a
+                      key={linkIndex}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex items-center gap-2 ${themeColors.primary} text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity`}
+                    >
+                      <span>{link.name}</span>
+                      <ExternalLink size={16} />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           ))}
