@@ -186,9 +186,9 @@ const GITHUB_REPO = 'wildside-switcheroo-guide'; // Correct repository name
 const GITHUB_API_BASE = 'https://api.github.com';
 
 // Development settings
-// NOTE: Repository is private, so browser cannot access GitHub API without authentication
-// Using local files until we set up authentication or make the repository public
-const USE_LOCAL_FILES = true; // Set to true because repository is private
+// NOTE: Repository is now public! We can fetch posts from GitHub
+// Switching to GitHub API to show real posts created by Make.com
+const USE_LOCAL_FILES = false; // Set to false to fetch from GitHub API
 const DEBUG_MODE = true; // Set to true to see detailed logging
 
 // Private repository notice - commented out to prevent build issues
