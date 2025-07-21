@@ -66,121 +66,116 @@ export const sampleBlogPosts: BlogPost[] = [
       <h3>Conclusion</h3>
       <p>Spring bass fishing offers some of the year's best opportunities. By understanding bass behavior and using the right techniques, you'll increase your chances of landing that trophy fish.</p>
     `,
-    author: 'Wildside Guide',
+    author: 'Mike Johnson',
     publishDate: '2024-01-15',
     readTime: 8,
-    tags: ['Bass Fishing', 'Spring', 'Techniques'],
-    image: 'https://images.unsplash.com/photo-1445251836269-d158eaa028a6?auto=format&fit=crop&w=800&q=80',
+    tags: ['Bass Fishing', 'Spring Fishing', 'Techniques'],
+    image: '',
     category: 'fishing',
     featured: true,
-    metaDescription: 'Learn the most effective spring bass fishing techniques including spinnerbaits, jigs, and crankbaits.',
-    metaKeywords: 'spring bass fishing, bass techniques, fishing tips, spinnerbaits, jigs'
+    metaDescription: 'Learn the best spring bass fishing techniques including spinnerbaits, jigs, and crankbaits. Expert tips for successful bass fishing.',
+    metaKeywords: 'spring bass fishing, bass fishing techniques, spinnerbaits, fishing jigs, crankbaits'
   },
   {
     id: '2',
     title: 'Essential Gear for Deep Sea Fishing',
     slug: 'essential-gear-deep-sea-fishing',
-    excerpt: 'Complete guide to the essential equipment needed for successful deep sea fishing adventures.',
+    excerpt: 'Complete guide to the must-have equipment for successful deep sea fishing adventures.',
     content: `
-      <h2>Deep Sea Fishing Gear Essentials</h2>
-      <p>Deep sea fishing requires specialized equipment to handle large fish and harsh marine conditions. This comprehensive guide covers all the essential gear you need for a successful offshore fishing trip.</p>
+      <h2>Deep Sea Fishing Equipment Guide</h2>
+      <p>Deep sea fishing requires specialized equipment designed to handle large fish and harsh marine conditions. Here's everything you need to know about selecting the right gear.</p>
       
       <h3>Rods and Reels</h3>
-      <h4>Heavy-Duty Rods</h4>
-      <p>Choose rods rated for 50-80 lb line with strong backbone for fighting large fish. Length should be 6-7 feet for boat fishing.</p>
+      <p>Your rod and reel combination is the foundation of your deep sea setup. Look for heavy-duty equipment that can handle 30-80 lb test line.</p>
       
-      <h4>Conventional Reels</h4>
-      <p>High-capacity reels with strong drag systems are essential. Look for reels that can hold 300+ yards of heavy line.</p>
+      <h4>Recommended Rods</h4>
+      <ul>
+        <li>6-7 foot heavy action rods</li>
+        <li>Roller guides for reduced line wear</li>
+        <li>Strong butt section for fighting large fish</li>
+      </ul>
+      
+      <h4>Reel Selection</h4>
+      <ul>
+        <li>Conventional reels with high line capacity</li>
+        <li>Strong drag system (minimum 25 lbs)</li>
+        <li>Corrosion-resistant materials</li>
+      </ul>
       
       <h3>Terminal Tackle</h3>
+      <p>The right terminal tackle can make or break your deep sea fishing trip. Essential items include:</p>
       <ul>
-        <li>Circle hooks in various sizes (6/0 to 12/0)</li>
+        <li>Circle hooks in sizes 6/0 to 12/0</li>
         <li>Heavy-duty swivels and snaps</li>
-        <li>Wire leaders for toothy fish</li>
-        <li>Sinkers from 8oz to 2lbs</li>
+        <li>Wire leaders for toothy species</li>
+        <li>Bank sinkers from 8oz to 2lbs</li>
       </ul>
       
       <h3>Safety Equipment</h3>
-      <p>Safety should always be your top priority when deep sea fishing:</p>
-      <ul>
-        <li>Life jackets for all passengers</li>
-        <li>First aid kit</li>
-        <li>Emergency flares</li>
-        <li>Radio communication device</li>
-        <li>GPS and fish finder</li>
-      </ul>
-      
-      <h3>Conclusion</h3>
-      <p>Proper equipment is crucial for deep sea fishing success. Invest in quality gear that can handle the demands of offshore fishing.</p>
+      <p>Never compromise on safety when heading offshore. Essential safety gear includes life jackets, flares, GPS, and radio communication.</p>
     `,
-    author: 'Wildside Guide',
+    author: 'Sarah Davis',
     publishDate: '2024-01-14',
-    readTime: 6,
-    tags: ['Deep Sea', 'Gear', 'Equipment'],
-    image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=800&q=80',
+    readTime: 12,
+    tags: ['Deep Sea', 'Fishing Gear', 'Equipment'],
+    image: '',
     category: 'fishing',
-    featured: false,
-    metaDescription: 'Complete guide to essential deep sea fishing gear including rods, reels, tackle, and safety equipment.',
-    metaKeywords: 'deep sea fishing gear, fishing equipment, offshore fishing, fishing tackle'
+    metaDescription: 'Complete guide to deep sea fishing equipment including rods, reels, tackle, and safety gear for offshore fishing.',
+    metaKeywords: 'deep sea fishing gear, offshore fishing equipment, fishing rods, fishing reels, fishing tackle'
   },
   {
     id: '3',
-    title: 'Bow Hunting Safety Tips for Beginners',
+    title: 'Bow Hunting Safety: Essential Tips for Beginners',
     slug: 'bow-hunting-safety-tips-beginners',
-    excerpt: 'Essential safety guidelines and tips for new bow hunters to ensure safe and successful hunting experiences.',
+    excerpt: 'Learn the fundamental safety practices every bow hunter should know before heading into the field.',
     content: `
       <h2>Bow Hunting Safety Fundamentals</h2>
-      <p>Bow hunting is an exciting and challenging pursuit, but safety must always be your top priority. This guide covers essential safety tips for beginning bow hunters.</p>
+      <p>Safety should always be the top priority in bow hunting. These essential tips will help keep you and others safe while pursuing your passion.</p>
       
       <h3>Equipment Safety</h3>
-      <h4>Bow Maintenance</h4>
-      <p>Regular inspection and maintenance of your bow is crucial for safety:</p>
+      <p>Regular equipment maintenance is crucial for safe bow hunting:</p>
       <ul>
-        <li>Check strings and cables for fraying</li>
-        <li>Inspect cams and wheels for damage</li>
-        <li>Ensure arrows are straight and properly fletched</li>
-        <li>Verify broadheads are sharp and secure</li>
+        <li>Inspect your bowstring before each hunt</li>
+        <li>Check arrow nocks for cracks or damage</li>
+        <li>Ensure broadheads are sharp and properly aligned</li>
+        <li>Verify your bow's draw weight and let-off</li>
       </ul>
       
       <h3>Tree Stand Safety</h3>
-      <p>Tree stand accidents are a leading cause of hunting injuries. Always:</p>
+      <p>Tree stand accidents are preventable with proper safety measures:</p>
       <ul>
-        <li>Use a full-body harness</li>
+        <li>Always use a full-body safety harness</li>
         <li>Inspect stands before each use</li>
         <li>Maintain three points of contact when climbing</li>
-        <li>Never hunt alone</li>
+        <li>Use a haul line for your bow and gear</li>
       </ul>
       
-      <h3>Shot Placement and Ethics</h3>
-      <p>Ethical bow hunting requires precise shot placement:</p>
+      <h3>Shot Selection and Ethics</h3>
+      <p>Ethical shot selection is fundamental to responsible bow hunting:</p>
       <ul>
-        <li>Practice regularly at various distances</li>
-        <li>Know your effective range</li>
-        <li>Wait for broadside shots</li>
-        <li>Avoid risky shots</li>
+        <li>Know your effective shooting range</li>
+        <li>Wait for broadside or quartering away shots</li>
+        <li>Avoid shots at moving animals</li>
+        <li>Practice regularly to maintain proficiency</li>
       </ul>
       
-      <h3>Emergency Preparedness</h3>
-      <p>Always be prepared for emergencies:</p>
+      <h3>Field Safety Rules</h3>
       <ul>
-        <li>Carry a first aid kit</li>
-        <li>Bring communication device</li>
-        <li>Tell someone your hunting plan</li>
-        <li>Know your location</li>
+        <li>Always identify your target and what's beyond it</li>
+        <li>Wear hunter orange when required</li>
+        <li>Inform someone of your hunting plans</li>
+        <li>Carry emergency communication devices</li>
       </ul>
-      
-      <h3>Conclusion</h3>
-      <p>Safe bow hunting practices protect you and others while ensuring ethical harvests. Never compromise on safety for the sake of a shot opportunity.</p>
     `,
-    author: 'Wildside Guide',
+    author: 'Tom Wilson',
     publishDate: '2024-01-13',
-    readTime: 7,
+    readTime: 10,
     tags: ['Bow Hunting', 'Safety', 'Beginners'],
-    image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=800&q=80',
+    image: '',
     category: 'hunting',
     featured: true,
-    metaDescription: 'Essential bow hunting safety tips for beginners including equipment safety, tree stand safety, and emergency preparedness.',
-    metaKeywords: 'bow hunting safety, hunting tips, tree stand safety, bow hunting beginners'
+    metaDescription: 'Essential bow hunting safety tips for beginners including equipment safety, tree stand safety, and field safety rules.',
+    metaKeywords: 'bow hunting safety, hunting safety tips, tree stand safety, bow hunting beginners'
   }
 ];
 
@@ -441,7 +436,7 @@ export const getBlogPosts = async (): Promise<BlogPost[]> => {
             publishDate: frontMatter.publishDate || new Date().toISOString().split('T')[0],
             readTime,
             tags: frontMatter.tags || [],
-            image: frontMatter.image || 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80',
+            image: frontMatter.image || '',
             category: frontMatter.category || 'fishing',
             featured: frontMatter.featured || false,
             slug: frontMatter.slug || id,

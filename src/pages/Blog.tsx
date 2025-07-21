@@ -136,18 +136,27 @@ const Blog = () => {
             <div className="grid md:grid-cols-2 gap-8">
               {featuredPosts.map((post) => (
                 <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="relative h-48">
-                    <img 
-                      src={post.image} 
-                      alt={post.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute top-4 left-4">
+                  {post.image && (
+                    <div className="relative h-48">
+                      <img 
+                        src={post.image} 
+                        alt={post.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <SimpleBadge className={`bg-gradient-to-r ${themeColors.gradient} text-white`}>
+                          Featured
+                        </SimpleBadge>
+                      </div>
+                    </div>
+                  )}
+                  {!post.image && (
+                    <div className="p-4">
                       <SimpleBadge className={`bg-gradient-to-r ${themeColors.gradient} text-white`}>
                         Featured
                       </SimpleBadge>
                     </div>
-                  </div>
+                  )}
                   <CardHeader>
                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-2">
                       <div className="flex items-center gap-1">
@@ -247,13 +256,15 @@ const Blog = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map((post) => (
                 <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="relative h-48">
-                    <img 
-                      src={post.image} 
-                      alt={post.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                  {post.image && (
+                    <div className="relative h-48">
+                      <img 
+                        src={post.image} 
+                        alt={post.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
                   <CardHeader>
                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-2">
                       <div className="flex items-center gap-1">
