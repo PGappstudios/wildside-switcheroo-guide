@@ -319,33 +319,104 @@ function parseFrontMatter(content: string): { frontMatter: BlogFrontMatter; cont
     }
   });
 
+  // Fix malformed Make.com posts where content is stuffed in title field
+  if (frontMatter.title && frontMatter.title.includes('```markdown')) {
+    // Extract the actual title and content from the malformed title field
+    const titleContent = frontMatter.title;
+    
+    // Remove markdown code blocks
+    let cleanContent = titleContent.replace(/```markdown\n?/g, '').replace(/```$/g, '');
+    
+    // Extract the first heading as the title
+    const titleMatch = cleanContent.match(/^##?\s+(.+)/m);
+    if (titleMatch) {
+      frontMatter.title = titleMatch[1].trim();
+      // Use the clean content as the main content instead of the original markdownContent
+      return { frontMatter, content: cleanContent };
+    }
+  }
+
   return { frontMatter, content: markdownContent };
 }
 
-// Simple markdown to HTML converter
+// Enhanced markdown to HTML converter for better formatting
 function markdownToHtml(markdown: string): string {
-  return markdown
+  // Clean up any remaining markdown code blocks first
+  let content = markdown
+    .replace(/```markdown\n?/g, '')
+    .replace(/```$/g, '')
+    .trim();
+  
+  // Split into lines for better processing
+  const lines = content.split('\n');
+  const processedLines: string[] = [];
+  let inList = false;
+  
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+    
+    // Skip empty lines initially
+    if (!line.trim()) {
+      if (!inList) {
+        processedLines.push('');
+      }
+      continue;
+    }
+    
     // Headers
-    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-    // Bold
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    // Italic
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    // Lists
-    .replace(/^\* (.*$)/gim, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
-    // Paragraphs
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/^(.*)$/gim, '<p>$1</p>')
-    // Clean up
-    .replace(/<p><h/g, '<h')
-    .replace(/<\/h([1-6])><\/p>/g, '</h$1>')
-    .replace(/<p><ul>/g, '<ul>')
-    .replace(/<\/ul><\/p>/g, '</ul>')
-    .replace(/<p>(<li>.*<\/li>)<\/p>/g, '$1')
-    .replace(/<p>\s*<\/p>/g, '');
+    if (line.match(/^#{1,4}\s+/)) {
+      if (inList) {
+        processedLines.push('</ul>');
+        inList = false;
+      }
+      line = line.replace(/^#### (.*$)/, '<h4>$1</h4>')
+                 .replace(/^### (.*$)/, '<h3>$1</h3>')
+                 .replace(/^## (.*$)/, '<h2>$1</h2>')
+                 .replace(/^# (.*$)/, '<h1>$1</h1>');
+      processedLines.push(line);
+      continue;
+    }
+    
+    // Lists (both - and * bullets)
+    if (line.match(/^[-*]\s+/)) {
+      if (!inList) {
+        processedLines.push('<ul>');
+        inList = true;
+      }
+      line = line.replace(/^[-*]\s+(.*)$/, '<li>$1</li>');
+      processedLines.push(line);
+      continue;
+    }
+    
+    // End list if we're in one and hit non-list content
+    if (inList) {
+      processedLines.push('</ul>');
+      inList = false;
+    }
+    
+    // Bold and italic
+    line = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+               .replace(/\*(.*?)\*/g, '<em>$1</em>');
+    
+    // Links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+    
+    // Regular paragraph
+    if (line.trim()) {
+      processedLines.push(`<p>${line}</p>`);
+    }
+  }
+  
+  // Close any open list
+  if (inList) {
+    processedLines.push('</ul>');
+  }
+  
+  return processedLines.join('\n')
+    // Clean up extra whitespace and empty paragraphs
+    .replace(/<p>\s*<\/p>/g, '')
+    .replace(/\n\n+/g, '\n')
+    .trim();
 }
 
 // Function to fetch blog posts from GitHub
