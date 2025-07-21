@@ -1,16 +1,6 @@
 // Global type declarations for the project
 
-declare module 'react' {
-  const React: any;
-  export = React;
-  export as namespace React;
-}
-
-declare module 'react/jsx-runtime' {
-  export const jsx: any;
-  export const jsxs: any;
-  export const Fragment: any;
-}
+// React types are handled by @types/react
 
 declare module 'lucide-react' {
   export const Calendar: any;
@@ -27,28 +17,9 @@ declare module 'lucide-react' {
   // Add other Lucide icons as needed
 }
 
-declare module 'react-router-dom' {
-  export const BrowserRouter: any;
-  export const Routes: any;
-  export const Route: any;
-  export const Link: any;
-  export const useLocation: any;
-  export const useParams: any;
-}
+// React Router and React Query types are handled by their respective packages
 
-declare module '@tanstack/react-query' {
-  export const QueryClient: any;
-  export const QueryClientProvider: any;
-  export const useQuery: any;
-}
-
-// Extend the BadgeProps interface to ensure children are accepted
-declare module '@/components/ui/badge' {
-  interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
-    variant?: 'default' | 'secondary' | 'destructive' | 'outline';
-    children?: React.ReactNode;
-  }
-}
+// Badge component types are handled by the actual component file
 
 // Global interface extensions
 interface Window {
