@@ -38,28 +38,32 @@ const Seasons = () => {
           months: 'March - May',
           description: 'Fish become more active as water temperatures rise',
           bestFor: ['Bass', 'Trout', 'Salmon'],
-          tips: ['Focus on shallow waters', 'Use bright colored lures', 'Early morning is best']
+          tips: ['Focus on shallow waters', 'Use bright colored lures', 'Early morning is best'],
+          image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=600&h=400&fit=crop'
         },
         {
           season: 'Summer',
           months: 'June - August',
           description: 'Peak fishing season with warm weather and long days',
           bestFor: ['Catfish', 'Walleye', 'Northern Pike'],
-          tips: ['Fish during dawn and dusk', 'Use live bait', 'Stay hydrated']
+          tips: ['Fish during dawn and dusk', 'Use live bait', 'Stay hydrated'],
+          image: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=600&h=400&fit=crop'
         },
         {
           season: 'Fall',
           months: 'September - November',
           description: 'Fish feed heavily preparing for winter',
           bestFor: ['Salmon', 'Steelhead', 'Bass'],
-          tips: ['Fish deeper waters', 'Use larger lures', 'Check migration patterns']
+          tips: ['Fish deeper waters', 'Use larger lures', 'Check migration patterns'],
+          image: 'https://images.unsplash.com/photo-1500673922987-e212871fec22?w=600&h=400&fit=crop'
         },
         {
           season: 'Winter',
           months: 'December - February',
           description: 'Ice fishing and cold-water opportunities',
           bestFor: ['Trout', 'Perch', 'Walleye'],
-          tips: ['Ice fishing gear needed', 'Fish mid-day', 'Dress warmly']
+          tips: ['Ice fishing gear needed', 'Fish mid-day', 'Dress warmly'],
+          image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=400&fit=crop'
         }
       ]
     : [
@@ -68,28 +72,32 @@ const Seasons = () => {
           months: 'March - May',
           description: 'Animals are active after winter, mating season begins',
           bestFor: ['Turkey', 'Bear', 'Wild Boar'],
-          tips: ['Scout early', 'Listen for mating calls', 'Check local regulations']
+          tips: ['Scout early', 'Listen for mating calls', 'Check local regulations'],
+          image: 'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=600&h=400&fit=crop'
         },
         {
           season: 'Summer',
           months: 'June - August',
           description: 'Limited hunting seasons, focus on preparation',
           bestFor: ['Groundhog', 'Crow', 'Predator Control'],
-          tips: ['Practice shooting', 'Scout locations', 'Maintain equipment']
+          tips: ['Practice shooting', 'Scout locations', 'Maintain equipment'],
+          image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=600&h=400&fit=crop'
         },
         {
           season: 'Fall',
           months: 'September - November',
           description: 'Prime hunting season as animals prepare for winter',
           bestFor: ['Deer', 'Elk', 'Moose'],
-          tips: ['Peak rutting season', 'Use calls effectively', 'Pattern animal movement']
+          tips: ['Peak rutting season', 'Use calls effectively', 'Pattern animal movement'],
+          image: 'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=600&h=400&fit=crop'
         },
         {
           season: 'Winter',
           months: 'December - February',
           description: 'Late season hunting with challenging conditions',
           bestFor: ['Rabbit', 'Squirrel', 'Waterfowl'],
-          tips: ['Dress in layers', 'Track in snow', 'Focus on food sources']
+          tips: ['Dress in layers', 'Track in snow', 'Focus on food sources'],
+          image: 'https://images.unsplash.com/photo-1485833077593-4278bba3f11f?w=600&h=400&fit=crop'
         }
       ];
 
@@ -122,47 +130,57 @@ const Seasons = () => {
       <div className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 gap-8">
           {seasons.map((season, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow">
-              <div className="text-center mb-6">
-                <h2 className="text-3xl font-bold text-gray-800 mb-2">
-                  {season.season}
-                </h2>
-                <p className={`text-lg ${themeColors.primary} bg-opacity-10 px-4 py-2 rounded-lg inline-block`}>
-                  {season.months}
-                </p>
+            <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={season.image} 
+                  alt={`${season.season} season`}
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+                <div className="absolute bottom-4 left-4 text-white">
+                  <h2 className="text-3xl font-bold mb-1">
+                    {season.season}
+                  </h2>
+                  <p className="text-lg bg-black bg-opacity-50 px-3 py-1 rounded">
+                    {season.months}
+                  </p>
+                </div>
               </div>
               
-              <p className="text-gray-600 mb-6 text-center">
-                {season.description}
-              </p>
+              <div className="p-8">
+                <p className="text-gray-600 mb-6 text-center">
+                  {season.description}
+                </p>
 
-              <div className="space-y-4">
-                <div>
-                  <h3 className="font-semibold text-gray-800 mb-2">
-                    {mode === 'fishing' ? 'Best Fish Species:' : 'Prime Targets:'}
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {season.bestFor.map((item) => (
-                      <span
-                        key={item}
-                        className={`${themeColors.secondary} px-3 py-1 rounded-full text-sm`}
-                      >
-                        {item}
-                      </span>
-                    ))}
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="font-semibold text-gray-800 mb-2">
+                      {mode === 'fishing' ? 'Best Fish Species:' : 'Prime Targets:'}
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {season.bestFor.map((item) => (
+                        <span
+                          key={item}
+                          className={`${themeColors.secondary} px-3 py-1 rounded-full text-sm`}
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                <div>
-                  <h3 className="font-semibold text-gray-800 mb-2">Pro Tips:</h3>
-                  <ul className="space-y-1">
-                    {season.tips.map((tip, tipIndex) => (
-                      <li key={tipIndex} className="text-gray-600 flex items-start">
-                        <span className="text-green-500 mr-2">•</span>
-                        {tip}
-                      </li>
-                    ))}
-                  </ul>
+                  <div>
+                    <h3 className="font-semibold text-gray-800 mb-2">Pro Tips:</h3>
+                    <ul className="space-y-1">
+                      {season.tips.map((tip, tipIndex) => (
+                        <li key={tipIndex} className="text-gray-600 flex items-start">
+                          <span className="text-green-500 mr-2">•</span>
+                          {tip}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
