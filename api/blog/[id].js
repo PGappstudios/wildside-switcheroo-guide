@@ -97,6 +97,7 @@ let blogPosts = [
       <h3>Shot Placement</h3>
       <p>Ethical shot placement is crucial. Only take shots within your effective range and when you have a clear, ethical shot opportunity.</p>
       
+      
       <h3>Field Safety Rules</h3>
       <ul>
         <li>Always identify your target and what's beyond it</li>
@@ -117,7 +118,7 @@ let blogPosts = [
   }
 ];
 
-export default function handler(req, res) {
+module.exports = function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
@@ -168,4 +169,4 @@ export default function handler(req, res) {
       details: error.message
     });
   }
-}
+};
