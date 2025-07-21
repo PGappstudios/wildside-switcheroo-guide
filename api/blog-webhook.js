@@ -1,38 +1,8 @@
-export interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  author: string;
-  publishDate: string;
-  readTime: number;
-  tags: string[];
-  image: string;
-  category: 'fishing' | 'hunting';
-  featured?: boolean;
-  slug?: string;
-  metaDescription?: string;
-  metaKeywords?: string;
-}
+// Vercel serverless function for Make.com blog webhook
+// This handles POST requests from Make.com to create, update, or delete blog posts
 
-export interface BlogApiConfig {
-  endpoint: string;
-  method: string;
-  headers: Record<string, string>;
-}
-
-// Configuration for Make.com webhook integration
-export const blogApiConfig: BlogApiConfig = {
-  endpoint: '/api/blog', // This will be your Make.com webhook endpoint
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer YOUR_API_KEY' // Replace with your actual API key
-  }
-};
-
-// Sample blog posts structure for Make.com to follow
-export const sampleBlogPosts: BlogPost[] = [
+// In-memory storage for blog posts (replace with database in production)
+let blogPosts = [
   {
     id: '1',
     title: 'Best Fishing Techniques for Spring Bass',
@@ -147,134 +117,173 @@ export const sampleBlogPosts: BlogPost[] = [
   }
 ];
 
-// Make.com webhook payload structure
-export interface MakeComBlogPayload {
-  action: 'create' | 'update' | 'delete';
-  post: BlogPost;
-  timestamp: string;
-  source: 'make.com';
+// Helper functions
+function validateBlogPost(post) {
+  const errors = [];
+  
+  if (!post.id) errors.push('Missing required field: id');
+  if (!post.title) errors.push('Missing required field: title');
+  if (!post.content) errors.push('Missing required field: content');
+  if (!post.category) errors.push('Missing required field: category');
+  
+  if (post.category && !['fishing', 'hunting'].includes(post.category)) {
+    errors.push('Invalid category. Must be "fishing" or "hunting"');
+  }
+  
+  return errors;
 }
 
-// Function to validate blog post data from Make.com
-export const validateBlogPost = (post: any): BlogPost | null => {
-  try {
-    // Required fields validation
-    if (!post.id || !post.title || !post.content || !post.category) {
-      console.error('Missing required blog post fields');
-      return null;
-    }
+function generateSlug(title) {
+  return title
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+}
 
-    // Category validation
-    if (!['fishing', 'hunting'].includes(post.category)) {
-      console.error('Invalid category. Must be "fishing" or "hunting"');
-      return null;
-    }
+function calculateReadTime(content) {
+  const wordsPerMinute = 200;
+  const wordCount = content.split(' ').length;
+  return Math.ceil(wordCount / wordsPerMinute);
+}
 
-    // Generate slug if not provided
-    const slug = post.slug || post.title.toLowerCase()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .trim();
+export default function handler(req, res) {
+  // CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-    return {
-      id: post.id,
-      title: post.title,
-      slug: slug,
-      excerpt: post.excerpt || post.content.substring(0, 200) + '...',
-      content: post.content,
-      author: post.author || 'Wildside Team',
-      publishDate: post.publishDate || new Date().toISOString().split('T')[0],
-      readTime: post.readTime || Math.ceil(post.content.split(' ').length / 200),
-      tags: Array.isArray(post.tags) ? post.tags : [],
-      image: post.image || 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80',
-      category: post.category,
-      featured: Boolean(post.featured),
-      metaDescription: post.metaDescription || post.excerpt,
-      metaKeywords: post.metaKeywords || post.tags?.join(', ') || ''
-    };
-  } catch (error) {
-    console.error('Error validating blog post:', error);
-    return null;
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
   }
-};
 
-// API base URL configuration
-const API_BASE_URL = typeof window !== 'undefined' 
-  ? window.location.origin 
-  : 'http://localhost:3000';
-
-// API functions for blog posts
-export const getBlogPosts = async (): Promise<BlogPost[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/blog-webhook`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    // Handle GET requests - return all blog posts
+    if (req.method === 'GET') {
+      return res.status(200).json({
+        success: true,
+        posts: blogPosts,
+        total: blogPosts.length
+      });
     }
-    const data = await response.json();
-    if (data.success && Array.isArray(data.posts)) {
-      return data.posts;
-    }
-    throw new Error('Invalid response format');
-  } catch (error) {
-    console.error('Error loading blog posts from API:', error);
-    // Fallback to sample data
-    return sampleBlogPosts;
-  }
-};
 
-export const getBlogPost = async (id: string): Promise<BlogPost | null> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/blog/${id}`);
-    if (!response.ok) {
-      if (response.status === 404) {
-        return null;
+    // Handle POST requests - create, update, or delete posts
+    if (req.method === 'POST') {
+      const { action, post, timestamp, source } = req.body;
+
+      if (!action || !post) {
+        return res.status(400).json({
+          success: false,
+          error: 'Missing required fields: action and post'
+        });
       }
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    if (data.success && data.post) {
-      return data.post;
-    }
-    throw new Error('Invalid response format');
-  } catch (error) {
-    console.error('Error loading blog post from API:', error);
-    // Fallback to sample data
-    const fallbackPost = sampleBlogPosts.find(p => p.id === id);
-    return fallbackPost || null;
-  }
-};
 
-// Make.com integration instructions
-export const MAKE_COM_INTEGRATION_GUIDE = {
-  webhookEndpoint: 'https://your-domain.com/api/blog-webhook',
-  requiredFields: {
-    id: 'Unique identifier for the post',
-    title: 'Post title',
-    content: 'HTML content of the post',
-    category: 'Either "fishing" or "hunting"',
-    author: 'Author name (optional, defaults to "Wildside Team")',
-    publishDate: 'Date in YYYY-MM-DD format (optional, defaults to today)',
-    tags: 'Array of tags (optional)',
-    image: 'Featured image URL (optional, uses default if not provided)',
-    featured: 'Boolean for featured status (optional)',
-    excerpt: 'Short description (optional, auto-generated from content)',
-    metaDescription: 'SEO meta description (optional)',
-    metaKeywords: 'SEO keywords (optional)'
-  },
-  samplePayload: {
-    action: 'create',
-    post: {
-      id: 'unique-post-id',
-      title: 'Amazing Fishing Technique',
-      content: '<h2>Introduction</h2><p>This is the post content...</p>',
-      category: 'fishing',
-      author: 'John Doe',
-      tags: ['fishing', 'techniques', 'bass'],
-      image: 'https://example.com/image.jpg',
-      featured: false
-    },
-    timestamp: new Date().toISOString(),
-    source: 'make.com'
+      // Validate the blog post data
+      const validationErrors = validateBlogPost(post);
+      if (validationErrors.length > 0) {
+        return res.status(400).json({
+          success: false,
+          error: 'Validation failed',
+          details: validationErrors
+        });
+      }
+
+      // Process the post with defaults
+      const processedPost = {
+        id: post.id,
+        title: post.title,
+        slug: post.slug || generateSlug(post.title),
+        excerpt: post.excerpt || post.content.replace(/<[^>]*>/g, '').substring(0, 200) + '...',
+        content: post.content,
+        author: post.author || 'Wildside Team',
+        publishDate: post.publishDate || new Date().toISOString().split('T')[0],
+        readTime: post.readTime || calculateReadTime(post.content),
+        tags: Array.isArray(post.tags) ? post.tags : [],
+        image: post.image || 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80',
+        category: post.category,
+        featured: Boolean(post.featured),
+        metaDescription: post.metaDescription || post.excerpt,
+        metaKeywords: post.metaKeywords || (Array.isArray(post.tags) ? post.tags.join(', ') : '')
+      };
+
+      // Handle different actions
+      if (action === 'create') {
+        // Check if post already exists
+        const existingIndex = blogPosts.findIndex(p => p.id === processedPost.id);
+        if (existingIndex >= 0) {
+          return res.status(409).json({
+            success: false,
+            error: 'Post with this ID already exists. Use "update" action to modify existing posts.'
+          });
+        }
+
+        // Add new post to the beginning of the array
+        blogPosts.unshift(processedPost);
+
+        return res.status(201).json({
+          success: true,
+          message: 'Blog post created successfully',
+          post: processedPost
+        });
+      }
+
+      if (action === 'update') {
+        const existingIndex = blogPosts.findIndex(p => p.id === processedPost.id);
+        if (existingIndex < 0) {
+          return res.status(404).json({
+            success: false,
+            error: 'Post not found. Use "create" action to add new posts.'
+          });
+        }
+
+        // Update existing post
+        blogPosts[existingIndex] = processedPost;
+
+        return res.status(200).json({
+          success: true,
+          message: 'Blog post updated successfully',
+          post: processedPost
+        });
+      }
+
+      if (action === 'delete') {
+        const existingIndex = blogPosts.findIndex(p => p.id === post.id);
+        if (existingIndex < 0) {
+          return res.status(404).json({
+            success: false,
+            error: 'Post not found'
+          });
+        }
+
+        // Remove post from array
+        const deletedPost = blogPosts.splice(existingIndex, 1)[0];
+
+        return res.status(200).json({
+          success: true,
+          message: 'Blog post deleted successfully',
+          post: deletedPost
+        });
+      }
+
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid action. Must be "create", "update", or "delete"'
+      });
+    }
+
+    // Method not allowed
+    return res.status(405).json({
+      success: false,
+      error: 'Method not allowed'
+    });
+
+  } catch (error) {
+    console.error('Webhook error:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Internal server error',
+      details: error.message
+    });
   }
-};
+}

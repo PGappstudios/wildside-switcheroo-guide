@@ -1,38 +1,8 @@
-export interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  author: string;
-  publishDate: string;
-  readTime: number;
-  tags: string[];
-  image: string;
-  category: 'fishing' | 'hunting';
-  featured?: boolean;
-  slug?: string;
-  metaDescription?: string;
-  metaKeywords?: string;
-}
+// Vercel serverless function to get individual blog posts
+// This handles GET requests to fetch a specific blog post by its ID
 
-export interface BlogApiConfig {
-  endpoint: string;
-  method: string;
-  headers: Record<string, string>;
-}
-
-// Configuration for Make.com webhook integration
-export const blogApiConfig: BlogApiConfig = {
-  endpoint: '/api/blog', // This will be your Make.com webhook endpoint
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer YOUR_API_KEY' // Replace with your actual API key
-  }
-};
-
-// Sample blog posts structure for Make.com to follow
-export const sampleBlogPosts: BlogPost[] = [
+// In-memory storage for blog posts (should match blog-webhook.js)
+let blogPosts = [
   {
     id: '1',
     title: 'Best Fishing Techniques for Spring Bass',
@@ -147,134 +117,55 @@ export const sampleBlogPosts: BlogPost[] = [
   }
 ];
 
-// Make.com webhook payload structure
-export interface MakeComBlogPayload {
-  action: 'create' | 'update' | 'delete';
-  post: BlogPost;
-  timestamp: string;
-  source: 'make.com';
+export default function handler(req, res) {
+  // CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'GET') {
+    return res.status(405).json({
+      success: false,
+      error: 'Method not allowed. This endpoint only supports GET requests.'
+    });
+  }
+
+  try {
+    const { id } = req.query;
+
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        error: 'Missing required parameter: id'
+      });
+    }
+
+    // Find the blog post by ID
+    const post = blogPosts.find(p => p.id === id);
+
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        error: 'Blog post not found',
+        id: id
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      post: post
+    });
+
+  } catch (error) {
+    console.error('Get blog post error:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Internal server error',
+      details: error.message
+    });
+  }
 }
-
-// Function to validate blog post data from Make.com
-export const validateBlogPost = (post: any): BlogPost | null => {
-  try {
-    // Required fields validation
-    if (!post.id || !post.title || !post.content || !post.category) {
-      console.error('Missing required blog post fields');
-      return null;
-    }
-
-    // Category validation
-    if (!['fishing', 'hunting'].includes(post.category)) {
-      console.error('Invalid category. Must be "fishing" or "hunting"');
-      return null;
-    }
-
-    // Generate slug if not provided
-    const slug = post.slug || post.title.toLowerCase()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .trim();
-
-    return {
-      id: post.id,
-      title: post.title,
-      slug: slug,
-      excerpt: post.excerpt || post.content.substring(0, 200) + '...',
-      content: post.content,
-      author: post.author || 'Wildside Team',
-      publishDate: post.publishDate || new Date().toISOString().split('T')[0],
-      readTime: post.readTime || Math.ceil(post.content.split(' ').length / 200),
-      tags: Array.isArray(post.tags) ? post.tags : [],
-      image: post.image || 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80',
-      category: post.category,
-      featured: Boolean(post.featured),
-      metaDescription: post.metaDescription || post.excerpt,
-      metaKeywords: post.metaKeywords || post.tags?.join(', ') || ''
-    };
-  } catch (error) {
-    console.error('Error validating blog post:', error);
-    return null;
-  }
-};
-
-// API base URL configuration
-const API_BASE_URL = typeof window !== 'undefined' 
-  ? window.location.origin 
-  : 'http://localhost:3000';
-
-// API functions for blog posts
-export const getBlogPosts = async (): Promise<BlogPost[]> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/blog-webhook`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    if (data.success && Array.isArray(data.posts)) {
-      return data.posts;
-    }
-    throw new Error('Invalid response format');
-  } catch (error) {
-    console.error('Error loading blog posts from API:', error);
-    // Fallback to sample data
-    return sampleBlogPosts;
-  }
-};
-
-export const getBlogPost = async (id: string): Promise<BlogPost | null> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/blog/${id}`);
-    if (!response.ok) {
-      if (response.status === 404) {
-        return null;
-      }
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    if (data.success && data.post) {
-      return data.post;
-    }
-    throw new Error('Invalid response format');
-  } catch (error) {
-    console.error('Error loading blog post from API:', error);
-    // Fallback to sample data
-    const fallbackPost = sampleBlogPosts.find(p => p.id === id);
-    return fallbackPost || null;
-  }
-};
-
-// Make.com integration instructions
-export const MAKE_COM_INTEGRATION_GUIDE = {
-  webhookEndpoint: 'https://your-domain.com/api/blog-webhook',
-  requiredFields: {
-    id: 'Unique identifier for the post',
-    title: 'Post title',
-    content: 'HTML content of the post',
-    category: 'Either "fishing" or "hunting"',
-    author: 'Author name (optional, defaults to "Wildside Team")',
-    publishDate: 'Date in YYYY-MM-DD format (optional, defaults to today)',
-    tags: 'Array of tags (optional)',
-    image: 'Featured image URL (optional, uses default if not provided)',
-    featured: 'Boolean for featured status (optional)',
-    excerpt: 'Short description (optional, auto-generated from content)',
-    metaDescription: 'SEO meta description (optional)',
-    metaKeywords: 'SEO keywords (optional)'
-  },
-  samplePayload: {
-    action: 'create',
-    post: {
-      id: 'unique-post-id',
-      title: 'Amazing Fishing Technique',
-      content: '<h2>Introduction</h2><p>This is the post content...</p>',
-      category: 'fishing',
-      author: 'John Doe',
-      tags: ['fishing', 'techniques', 'bass'],
-      image: 'https://example.com/image.jpg',
-      featured: false
-    },
-    timestamp: new Date().toISOString(),
-    source: 'make.com'
-  }
-};

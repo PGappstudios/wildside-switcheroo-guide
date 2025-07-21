@@ -7,17 +7,54 @@ import { Badge } from '../components/ui/badge';
 import AdBanner from '../components/AdBanner';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
-import { BlogPost, getBlogPosts } from '../data/blogData';
+import { BlogPost, getBlogPost, getBlogPosts } from '../data/blogData';
 
 const BlogPostComponent = () => {
   const { id } = useParams<{ id: string }>();
   const { mode, themeColors } = useTheme();
+  const [post, setPost] = React.useState<BlogPost | null>(null);
+  const [relatedPosts, setRelatedPosts] = React.useState<BlogPost[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const loadPost = async () => {
+      if (!id) return;
+      
+      try {
+        setLoading(true);
+        const loadedPost = await getBlogPost(id);
+        setPost(loadedPost);
+        
+        if (loadedPost) {
+          // Load related posts
+          const allPosts = await getBlogPosts();
+          const related = allPosts
+            .filter(p => p.category === loadedPost.category && p.id !== loadedPost.id)
+            .slice(0, 2);
+          setRelatedPosts(related);
+        }
+      } catch (error) {
+        console.error('Error loading blog post:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    loadPost();
+  }, [id]);
 
   if (!mode) return null;
 
-  // Load blog posts and find the post by ID
-  const allPosts = getBlogPosts();
-  const post = allPosts.find(p => p.id === id);
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading blog post...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!post) {
     return (
@@ -116,16 +153,7 @@ const BlogPostComponent = () => {
 
         {/* Article Header */}
         <header className="mb-8">
-          {/* Featured Badge */}
-          {post.featured && (
-            <div className="mb-4">
-              <Badge className={`bg-gradient-to-r ${themeColors.gradient} text-white`}>
-                Featured Article
-              </Badge>
-            </div>
-          )}
-          
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight">
             {post.title}
           </h1>
           
@@ -147,9 +175,9 @@ const BlogPostComponent = () => {
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-6">
             {post.tags.map((tag) => (
-              <Badge key={tag} variant="secondary">
+              <span key={tag} className="inline-flex items-center rounded-full border border-gray-300 px-2.5 py-0.5 text-xs font-semibold text-gray-700">
                 {tag}
-              </Badge>
+              </span>
             ))}
           </div>
 
@@ -192,9 +220,9 @@ const BlogPostComponent = () => {
               <span className="text-gray-600">Tagged:</span>
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
-                  <Badge key={tag} variant="outline">
+                  <span key={tag} className="inline-flex items-center rounded-full border border-gray-300 px-2.5 py-0.5 text-xs font-semibold text-gray-700">
                     {tag}
-                  </Badge>
+                  </span>
                 ))}
               </div>
             </div>
@@ -214,25 +242,24 @@ const BlogPostComponent = () => {
         <section className="mb-8">
           <h3 className="text-2xl font-bold text-gray-800 mb-6">More {post.category === 'fishing' ? 'Fishing' : 'Hunting'} Articles</h3>
           <div className="grid md:grid-cols-2 gap-6">
-            {allPosts
-              .filter(p => p.category === post.category && p.id !== post.id)
-              .slice(0, 2)
-              .map((relatedPost) => (
-                <Link 
-                  key={relatedPost.id} 
-                  to={`/blog/${relatedPost.id}`}
-                  className="group block bg-white border rounded-lg p-6 hover:shadow-lg transition-shadow"
-                >
+            {relatedPosts.map((relatedPost) => (
+              <Link 
+                key={relatedPost.id} 
+                to={`/blog/${relatedPost.id}`}
+                className="group block bg-white border rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+              >
+                <div className="p-4">
                   <h4 className="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors mb-2">
                     {relatedPost.title}
                   </h4>
-                  <p className="text-sm text-gray-600 mb-3">{relatedPost.excerpt}</p>
+                  <p className="text-sm text-gray-600 mb-2">{relatedPost.excerpt}</p>
                   <div className="flex items-center gap-4 text-xs text-gray-500">
                     <span>{formatDate(relatedPost.publishDate)}</span>
                     <span>{relatedPost.readTime} min read</span>
                   </div>
-                </Link>
-              ))}
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
 

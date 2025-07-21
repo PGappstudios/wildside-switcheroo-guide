@@ -27,15 +27,37 @@ const SimpleBadge = ({ children, className = '', variant = 'default', ...props }
 const Blog = () => {
   const { mode, themeColors } = useTheme();
   const [selectedTag, setSelectedTag] = React.useState('');
-  const [posts, setPosts] = React.useState([]);
+  const [posts, setPosts] = React.useState<BlogPost[]>([]);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    // Load blog posts from data source
-    const loadedPosts = getBlogPosts();
-    setPosts(loadedPosts);
+    const loadPosts = async () => {
+      try {
+        setLoading(true);
+        const loadedPosts = await getBlogPosts();
+        setPosts(loadedPosts);
+      } catch (error) {
+        console.error('Error loading blog posts:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    loadPosts();
   }, []);
 
   if (!mode) return null;
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading blog posts...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Filter posts by current mode
   const modePosts = posts.filter(post => post.category === mode);
@@ -113,12 +135,7 @@ const Blog = () => {
             <div className="grid md:grid-cols-2 gap-8">
               {featuredPosts.map((post) => (
                 <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                  <CardHeader className="relative">
-                    <div className="absolute top-4 right-4">
-                      <SimpleBadge className={`bg-gradient-to-r ${themeColors.gradient} text-white`}>
-                        Featured
-                      </SimpleBadge>
-                    </div>
+                  <CardHeader>
                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-2">
                       <div className="flex items-center gap-1">
                         <User className="h-4 w-4" />
