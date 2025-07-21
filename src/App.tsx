@@ -16,6 +16,8 @@ import Maps from "./pages/Maps";
 import Regulations from "./pages/Regulations";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +43,8 @@ const AppContent = () => {
         <Route path="/animals" element={<Species />} />
         <Route path="/maps" element={<Maps />} />
         <Route path="/regulations" element={<Regulations />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="*" element={<NotFound />} />
