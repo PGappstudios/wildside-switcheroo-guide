@@ -114,25 +114,18 @@ const BlogPostComponent = () => {
           </Link>
         </div>
 
-        {/* Hero Image */}
-        <div className="relative h-64 md:h-96 rounded-xl overflow-hidden mb-8">
-          <img 
-            src={post.image} 
-            alt={post.title}
-            className="w-full h-full object-cover"
-          />
+        {/* Article Header */}
+        <header className="mb-8">
+          {/* Featured Badge */}
           {post.featured && (
-            <div className="absolute top-4 left-4">
+            <div className="mb-4">
               <Badge className={`bg-gradient-to-r ${themeColors.gradient} text-white`}>
-                Featured
+                Featured Article
               </Badge>
             </div>
           )}
-        </div>
-
-        {/* Article Header */}
-        <header className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight">
+          
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
             {post.title}
           </h1>
           
@@ -228,24 +221,15 @@ const BlogPostComponent = () => {
                 <Link 
                   key={relatedPost.id} 
                   to={`/blog/${relatedPost.id}`}
-                  className="group block bg-white border rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+                  className="group block bg-white border rounded-lg p-6 hover:shadow-lg transition-shadow"
                 >
-                  <div className="h-32 overflow-hidden">
-                    <img 
-                      src={relatedPost.image} 
-                      alt={relatedPost.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h4 className="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors mb-2">
-                      {relatedPost.title}
-                    </h4>
-                    <p className="text-sm text-gray-600 mb-2">{relatedPost.excerpt}</p>
-                    <div className="flex items-center gap-4 text-xs text-gray-500">
-                      <span>{formatDate(relatedPost.publishDate)}</span>
-                      <span>{relatedPost.readTime} min read</span>
-                    </div>
+                  <h4 className="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors mb-2">
+                    {relatedPost.title}
+                  </h4>
+                  <p className="text-sm text-gray-600 mb-3">{relatedPost.excerpt}</p>
+                  <div className="flex items-center gap-4 text-xs text-gray-500">
+                    <span>{formatDate(relatedPost.publishDate)}</span>
+                    <span>{relatedPost.readTime} min read</span>
                   </div>
                 </Link>
               ))}
