@@ -47,10 +47,15 @@ const HomePage = () => {
     "name": mode === 'fishing' ? "Wildside Fishing Guide" : "Wildside Hunting Guide",
     "description": content.description,
     "url": "https://wildside-guide.com",
+    "logo": "https://wildside-guide.com/lovable-uploads/9afe033d-e67a-4acb-942a-09877b7ae9a6.png",
     "publisher": {
       "@type": "Organization",
       "name": "Wildside Guide",
-      "description": "Premier outdoor adventure guide platform"
+      "description": "Premier outdoor adventure guide platform",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://wildside-guide.com/lovable-uploads/9afe033d-e67a-4acb-942a-09877b7ae9a6.png"
+      }
     },
     "mainEntity": {
       "@type": "Organization",
@@ -68,7 +73,7 @@ const HomePage = () => {
         canonical="https://wildside-guide.com"
         ogTitle={content.title}
         ogDescription={content.description}
-        ogImage="https://wildside-guide.com/images/wildside-og-image.jpg"
+        ogImage="https://wildside-guide.com/lovable-uploads/9afe033d-e67a-4acb-942a-09877b7ae9a6.png"
         schemaData={schemaData}
       />
 
@@ -176,7 +181,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Bottom Ad Banner */}
       <div className="py-8 bg-white">

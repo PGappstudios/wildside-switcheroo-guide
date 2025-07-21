@@ -2,7 +2,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
-import { Fish, Target } from 'lucide-react';
 
 const Header = () => {
   const { mode, setMode, themeColors } = useTheme();
@@ -33,12 +32,13 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-2 text-xl font-bold hover-scale group">
-            {mode === 'fishing' ? 
-              <Fish className="h-6 w-6 transition-transform duration-300 group-hover:rotate-12" /> : 
-              <Target className="h-6 w-6 transition-transform duration-300 group-hover:rotate-180" />
-            }
+            <img 
+              src="/lovable-uploads/9afe033d-e67a-4acb-942a-09877b7ae9a6.png" 
+              alt="Wildside Guide Logo" 
+              className="h-8 w-8 transition-transform duration-300 group-hover:scale-110"
+            />
             <span className="transition-colors duration-300 group-hover:text-yellow-300">
-              {mode === 'fishing' ? 'Fishing' : 'Hunting'}
+              Wildside Guide
             </span>
           </Link>
           
