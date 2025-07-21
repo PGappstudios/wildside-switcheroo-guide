@@ -60,8 +60,8 @@ const Blog = () => {
     );
   }
 
-  // Filter posts by current mode
-  const modePosts = posts.filter(post => post.category === mode);
+  // Filter posts by current mode and limit to 10 posts
+  const modePosts = posts.filter(post => post.category === mode).slice(0, 10);
   const featuredPosts = modePosts.filter(post => post.featured);
   const regularPosts = modePosts.filter(post => !post.featured);
 
